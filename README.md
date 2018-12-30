@@ -6,7 +6,7 @@ Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 1 - Clone o Projeto: 
   git clone https://github.com/bino2018/laravel-financas.git
   
-2 - Dentro do Projeto, acesse a Pasta banco de dadose crie um banco de dados com o arquivo nomeado como financas.sql
+2 - Dentro do Projeto, acesse a Pasta banco de dados e crie um banco de dados com o arquivo nomeado como financas.sql
 
 3 - Crie um usuário na tabela usuario para poder acessar o sistema
   Atenção! A senha deve ser criptografada em sha1 para este estudo de caso.
