@@ -15,12 +15,12 @@ Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 <h1>4 - Configure a Conexão com Banco </h1>
 <p>Encontre o arquivo .env e localize esse trecho de código:</p>
 <br>
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
+DB_CONNECTION=mysql<br>
+DB_HOST=127.0.0.1<br>
+DB_PORT=3306<br>
+DB_DATABASE=<br>
+DB_USERNAME=<br>
+DB_PASSWORD=<br>
 <br>
 <p>Depois altere a conexão conforme os dados de sua conexão.</p>
 
