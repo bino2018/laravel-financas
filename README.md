@@ -35,13 +35,16 @@ DB_PASSWORD=senha<br>
 values('nomeusuario','senha','email@gmail.com','1','1');
 
 <h1>6 - Instale o projeto</h1>
-<p> Usando um terminal acesse a pasta sistema e rode o comando: composer install </p>
+<p> Usando um terminal acesse a pasta laravel-financas/sistema e rode o comando: composer install 
+  <br>
+  Lembre-se que essa é a pasta do projeto que você clonou.
+</p>
 
 <h1>7 - Inicie a aplicação </h1>
 <p>Após concluir a instalação, ainda na mesma pasta rode o comando:<br> php artisan serve</p>
 
 <h1>8 - Acesse a aplicação</h1>
-<p>Digite na url do broswer: 127.0.0.1:8000 ou localhost:8000</p>
+<p>Digite na url do broswer um dos seguintes endereços: 127.0.0.1:8000 ou localhost:8000</p>
 
 <h1>9 - Faça login</h1>
 <p>Clique em login e faça login conforme o usuário que cadastrou na tabela usuario</p>
