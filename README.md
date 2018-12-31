@@ -1,6 +1,7 @@
 # laravel-financas
 Autor: Fernando Bino Machado<br>
-Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
+e-mail: fernando.bino.machado@gmail.com<br>
+Descrição: Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 
 
 <h1> 1 - Clone o Projeto:  </h1>
