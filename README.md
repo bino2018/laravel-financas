@@ -3,8 +3,8 @@ Autor: Fernando Bino Machado
 Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 
 
-1 - Clone o Projeto: 
-  git clone https://github.com/bino2018/laravel-financas.git
+<h1> 1 - Clone o Projeto:  </h1>
+  <p> git clone https://github.com/bino2018/laravel-financas.git </p>
   
 2 - Dentro do Projeto, acesse a Pasta banco de dados e crie um banco de dados com o arquivo nomeado como financas.sql
 
