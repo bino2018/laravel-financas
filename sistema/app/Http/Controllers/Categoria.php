@@ -28,7 +28,9 @@ class Categoria{
         $calculoCategorias = $this->categoria->calculoCategorias($listaCategorias);
         
         $data['data']['categorias'] = $calculoCategorias;
+        
         return view('categoria.index')->with($data);
+        
     }
 
     /**
@@ -53,6 +55,7 @@ class Categoria{
             
             //redireciona apos acao
             return redirect('/categorias');
+            
         
         //altera categoria existente
         }else{

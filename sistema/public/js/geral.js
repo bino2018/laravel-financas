@@ -345,3 +345,14 @@ function limparCampos(strClass, strFocus){
 
     }
 }
+
+function smokeAlert(texto,tipo){
+    try{
+        $.smkAlert({
+            text: texto,
+            type: tipo,
+            position: 'top-right',
+            time: 3
+        });
+    }catch(e){}
+}

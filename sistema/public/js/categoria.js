@@ -63,6 +63,7 @@ $(function(){
     */
 
     $('.bt-excluir').click(function(){
+        
         if(confirm("DESEJA EXCLUIR A CATEGORIA SELECIONADA??")){
             //prepara parametros para requisição
             obj = {
