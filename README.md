@@ -23,6 +23,12 @@ Depois altere a conexão conforme os dados de sua conexão.
 
 4 - Crie um usuário na tabela usuario para poder acessar o sistema
   Atenção! A senha deve ser criptografada em sha1 para este estudo de caso.
+  Exemplo: 
+  
+  use nomeDoSeuBanco;
+  
+  insert into usuario (nmUsuario,dsSenha,dsEmail,cdPermissao,cdStatus)
+values('nomeusuario','senha','email@gmail.com','1','1');
 
 5 - Usando um terminal acesse a pasta sistema e rode o comando: composer install
 
