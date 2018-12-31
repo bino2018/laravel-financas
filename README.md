@@ -12,7 +12,7 @@ Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 
 5 - Encontre o arquivo .env e localize esse trecho de código:
 
-DB_CONNECTION=mysql\n
+DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=
