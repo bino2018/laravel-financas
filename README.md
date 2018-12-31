@@ -27,7 +27,7 @@ DB_PASSWORD=senha<br>
 <h1>5 - Crie um usuário na tabela usuario para poder acessar o sistema</h1>
 
 <p>Atenção! A senha deve ser criptografada em sha1 para este estudo de caso.
-  <br>Exemplo: 
+  <br>Rode esse comando sql substituindo os valores para os valores do usuário que pretende criar: 
   
   <br>use nomeDoSeuBanco;
   
