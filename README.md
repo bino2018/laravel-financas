@@ -6,9 +6,11 @@ Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 <h1> 1 - Clone o Projeto:  </h1>
   <p> git clone https://github.com/bino2018/laravel-financas.git </p>
   
-2 - Dentro do Projeto, acesse a Pasta banco de dados e crie um banco de dados com o arquivo nomeado como financas.sql
+<h1> 2 - Crie o Banco de Dados </h1>
+<p>Dentro do Projeto, acesse a Pasta banco de dados e crie um banco de dados com o arquivo nomeado como financas.sql</p>
 
-3 - Abra o projeto no seu editor de textos sublime vscode notepad++ ou qualquer outro
+<h1>3 - Abra o projeto para edição </h1>
+<p>Utilizando o seu editor de textos sublime vscode notepad++ ou qualquer outro, selecione a pasta do projeto clonado e abra no editor escolhido</p>
 
 5 - Encontre o arquivo .env e localize esse trecho de código:
 
