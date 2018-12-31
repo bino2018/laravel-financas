@@ -1,5 +1,5 @@
 # laravel-financas
-Autor: Fernando Bino Machado
+Autor: Fernando Bino Machado<br>
 Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 
 
