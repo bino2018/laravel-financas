@@ -10,32 +10,38 @@ Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 <p>Dentro do Projeto, acesse a Pasta banco de dados e crie um banco de dados com o arquivo nomeado como financas.sql</p>
 
 <h1>3 - Abra o projeto para edição </h1>
-<p>Utilizando o seu editor de textos sublime vscode notepad++ ou qualquer outro, selecione a pasta do projeto clonado e abra no editor escolhido</p>
+<p>Utilizando um editor de código sublime, vscode, notepad++ ou qualquer outro, selecione a pasta do projeto clonado e abra no editor escolhido</p>
 
-5 - Encontre o arquivo .env e localize esse trecho de código:
-
+<h1>4 - Configure a Conexão com Banco </h1>
+<p>Encontre o arquivo .env e localize esse trecho de código:</p>
+<br>
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_DATABASE=
 DB_USERNAME=
 DB_PASSWORD=
+<br>
+<p>Depois altere a conexão conforme os dados de sua conexão.</p>
 
-Depois altere a conexão conforme os dados de sua conexão.
+<h1>5 - Crie um usuário na tabela usuario para poder acessar o sistema</h1>
 
-4 - Crie um usuário na tabela usuario para poder acessar o sistema
-  Atenção! A senha deve ser criptografada em sha1 para este estudo de caso.
-  Exemplo: 
+<p>Atenção! A senha deve ser criptografada em sha1 para este estudo de caso.
+  <br>Exemplo: 
   
-  use nomeDoSeuBanco;
+  <br>use nomeDoSeuBanco;
   
-  insert into usuario (nmUsuario,dsSenha,dsEmail,cdPermissao,cdStatus)
+  <br>insert into usuario (nmUsuario,dsSenha,dsEmail,cdPermissao,cdStatus)
 values('nomeusuario','senha','email@gmail.com','1','1');
 
-5 - Usando um terminal acesse a pasta sistema e rode o comando: composer install
+<h1>6 - Instale o projeto</h1>
+<p> Usando um terminal acesse a pasta sistema e rode o comando: composer install </p>
 
-6 - Após concluir a instalação, ainda na mesma pasta rode o comando php artisan serve
+<h1>7 - Inicie a aplicação </h1>
+<p>Após concluir a instalação, ainda na mesma pasta rode o comando:<br> php artisan serve</p>
 
-7 - Digite na url do broswer: 127.0.0.1:8000 ou localhost:8000
+<h1>8 - Acesse a aplicação</h1>
+<p>Digite na url do broswer: 127.0.0.1:8000 ou localhost:8000</p>
 
-8 - Clique em login e faça login conforme o usuário que cadastrou na tabela usuario
+<h1>9 - Faça login</h1>
+<p>Clique em login e faça login conforme o usuário que cadastrou na tabela usuario</p>
