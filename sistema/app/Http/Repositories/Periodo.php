@@ -84,4 +84,33 @@ class Periodo{
 
         return ['inicial'=>$dtHoje, 'final'=>$dtFinal];
     }
+
+    /**
+    * @description: retorna diferenca em anos entre periodos com base em duas datas recebidas
+    * @author: Fernando Bino Machado
+    * @param: $dtinicio data inicial
+    * @param: $dtfim data final
+    * @return: int $anos, retorna a diferenca em anos
+    */
+
+    public function difDias($dtinicio, $dtFinal){
+        //define as datas
+        $dt1 = new DateTime($dtinicio);        
+        $dt2 = new DateTime($dtFinal);
+        
+        //pega a diferença entre as datas de acordo com seu timestamps, caso o usuário tenha se enganado
+        if( $dt1->getTimestamp() < $dt2->getTimestamp() ){
+            $dif = date_diff($dt1,$dt2);
+        }else{
+            $dif = date_diff($dt2,$dt1);
+        }
+
+        //dias gerais
+        $anos = $dif->format('%Y');
+        
+        return $anos;
+
+    }
+
+
 }

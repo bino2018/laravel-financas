@@ -78,7 +78,11 @@
     Route::get('/saldo', 'Saldo@index')->middleware(['validar']);
 
     //Pesquisa Periodo saldo em dias
-    Route::post('saldo', 'Saldo@index')->middleware(['validar']);
+    Route::post('/saldo', 'Saldo@index')->middleware(['validar']);
 
-//RELATORIOS
-    
+//APLICAÇÕES
+    //View aplicações
+    Route::get('/aplicacao', 'Aplicacao@index')->middleware(['validar']);
+
+    //calcula aplicação
+    Route::post('/calcular-aplicacao','Aplicacao@calcular')->middleware(['validar']);

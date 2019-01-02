@@ -6,4 +6,5 @@
     <a href="/lancamentos" class="btn btn-default btn-sm text-light bt-menu">Lançamentos</a>
     <a href="/saldo" class="btn btn-default btn-sm text-light bt-menu">saldo</a>
     <!-- <a href="/relatorios" class="btn btn-default btn-sm text-light bt-menu">Relatórios</a> -->
+    <a href="/aplicacao" class="btn btn-default btn-sm text-light bt-menu">Aplicações</a>
 </div>
