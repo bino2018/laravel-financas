@@ -136,6 +136,14 @@ class Orcamento{
             //salva orcamento
             $acao = $this->pesquisa->salvar($valores);
 
+            if($acao > 0){
+                session(['message'=>'Item de Orçamento Salvo com Sucesso!!']);
+                session(['tipoMessage'=>'1']);
+            }else{
+                session(['message'=>'Não foi possível salvar o item de orçamento']);
+                session(['tipoMessage'=>'2']);
+            }
+
             //redireciona apos ação
             return redirect('/orcamentos');
             
@@ -155,6 +163,14 @@ class Orcamento{
             
             //altera orçamento
             $acao = $this->pesquisa->alterarCamposPorValor($valores);
+
+            if($acao > 0){
+                session(['message'=>'Item de Orçamento Alterado com Sucesso!!']);
+                session(['tipoMessage'=>'1']);
+            }else{
+                session(['message'=>'Não foi possível alterar o item de orçamento']);
+                session(['tipoMessage'=>'2']);
+            }
 
             //redireciona apos ação
             return redirect('/orcamentos');

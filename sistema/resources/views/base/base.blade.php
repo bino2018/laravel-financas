@@ -9,6 +9,7 @@
     
 </head>
 <body>
+
     @include('base.nav')
     
     <div class="template bg-dark">
@@ -18,4 +19,7 @@
     </div>
 
 </body>
+
+@include('helper.alerts')
+
 </html>

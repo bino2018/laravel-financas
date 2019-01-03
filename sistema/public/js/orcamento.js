@@ -129,10 +129,13 @@ function respostaDeletaOrcamento(resp){
     try{
         var jsonResp = JSON.parse(resp)
 
-        alert(jsonResp.message)
+        $('#categoria').focus()
 
         if(jsonResp.status == "1"){
+            message('Registro exluído com sucesso!!',1)
             redireciona('/orcamentos')
+        }else{
+            message('Não foi possível excluir o registro...')
         }
     }catch(e){}
 }

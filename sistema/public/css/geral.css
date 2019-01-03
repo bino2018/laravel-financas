@@ -35,7 +35,6 @@
 .panel-body{
     margin-right: 10px;
     margin-left: -3px;
-    max-height: 92%;
     display: block;
     overflow-y: scroll;
 }
@@ -66,13 +65,6 @@ table{
 }
 table thead td{
     background-color: #f1f1f1;
-}
-
-/* Divs col-sm que contem tabelas */
-.panel-table{
-    height: 500px;
-    display: block;
-    overflow-y: scroll;
 }
 
 /* Marcações de Status em registros nas tabelas */

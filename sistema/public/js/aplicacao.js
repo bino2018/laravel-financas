@@ -1,5 +1,5 @@
 $(function(){
-
+    
     /**
      * @description: valida os campos antes de submeter para calculo
      * @author: Fernando Bino Machado

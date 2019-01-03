@@ -106,11 +106,16 @@ function configsInicio(){
 function respostaDeletaCategoria(resp){
     try{
         var jsonResp = JSON.parse(resp)
-
-        alert(jsonResp.message)
+        
+        $('#categoria').focus()
 
         if(jsonResp.status == "1"){
+            
+            message('Registro Excluído com sucesso!!',1)
             redireciona('/categorias')
+        
+        }else{
+            message('Não foi possíve excluir o registro',2)
         }
     }catch(e){}
 }

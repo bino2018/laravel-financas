@@ -64,6 +64,14 @@ class Lancamento{
         //salva o lançamento
         $acao = $this->pesquisa->salvar($valores);
 
+        if($acao > 0){
+            session(['message'=>'Lançamento Efetuado com Sucesso!!']);
+            session(['tipoMessage'=>'1']);
+        }else{
+            session(['message'=>'Não foi possível efetuar o lançamento...']);
+            session(['tipoMessage'=>'2']);
+        }
+
         //retorna apos acao
         return redirect('/lancamentos');
     }

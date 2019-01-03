@@ -73,6 +73,14 @@ class Conta{
             //insere conta no banco
             $acao = $this->pesquisa->salvar($valores);
 
+            if($acao > 0){
+                session(['message'=>'Conta Salva com sucesso!!']);
+                session(['tipoMessage'=>'1']);
+            }else{
+                session(['message'=>'Não foi possível salvar a conta...']);
+                session(['tipoMessage'=>'2']);
+            }
+
             //redireciona apos ação
             return redirect('/contas');
 
@@ -84,6 +92,14 @@ class Conta{
 
             //altera conta
             $acao = $this->pesquisa->alterarCamposPorValor($valores);
+
+            if($acao > 0){
+                session(['message'=>'Conta Alterada com sucesso!!']);
+                session(['tipoMessage'=>'1']);
+            }else{
+                session(['message'=>'Não foi possível alterar a conta...']);
+                session(['tipoMessage'=>'2']);
+            }
 
             //redireciona apos ação
             return redirect('/contas');

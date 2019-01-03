@@ -200,6 +200,8 @@ class Conta{
                         ->orderBy('dia')
                         ->get();
         
+        $novasContas = 0;
+
         //verifica em cada orçamento se é permitido o cadastro
         foreach( $orcamentos as $num => $val ){
             
@@ -226,7 +228,11 @@ class Conta{
                     $valores['valores']['dtVencimento'] = $dataConta;
                     $valores['valores']['tpConta'] = $val->tpOrcamento;
                     
-                    $this->pesquisa->salvar($valores);
+                    $novaConta = $this->pesquisa->salvar($valores);
+
+                    if($novaConta > 0){
+                        $novasContas += 1;
+                    }
                 }
 
 
@@ -245,10 +251,17 @@ class Conta{
                 $valores['valores']['dtVencimento'] = "{$anoAtual}-{$mesAtual}-{$diaOrcamento} 00:00:00";
                 $valores['valores']['tpConta'] = $val->tpOrcamento;
                 
-                $this->pesquisa->salvar($valores);
+                $novaConta = $this->pesquisa->salvar($valores);
+
+                if($novaConta > 0){
+                    $novasContas += 1;
+                }
             }
         }
         
+        session(['message'=>'Processo de Geração de Contas Concluído: '.$novasContas.' conta(s) gerada(s) !!']);
+        session(['tipoMessage'=>'1']);
+
         return true;
         
     }

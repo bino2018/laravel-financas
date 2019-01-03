@@ -61,18 +61,18 @@ class Aplicacao{
         $imposto = ($bruto / 100) * $params['imposto'];
         $corretora = ($bruto / 100) * $params['taxa-corretora'];
         
-        $bruto = number_format($bruto,2,'.','');
+        $valorBruto = number_format($montante,2,'.','');
         $custodia = number_format($custodia,2,'.','');
         $imposto = number_format($imposto,2,'.','');
         $corretora = number_format($corretora,2,'.','');
-        $montante = number_format( ($montante - ($imposto + $custodia + $corretora))  ,2,'.','');
+        $valorLiquido = number_format( ($montante - ($imposto + $custodia + $corretora))  ,2,'.','');
         $valorInicial = number_format($params['valor'],2,'.','');
 
-        $dados['bruto'] = $montante;
+        $dados['bruto'] = $valorBruto;
         $dados['custodia'] = $custodia;
         $dados['corretora'] = $corretora;
         $dados['imposto'] = $imposto;
-        $dados['liquido'] = $montante;
+        $dados['liquido'] = $valorLiquido;
         $dados['valor'] = $valorInicial;
 
         return view('aplicacao.index')->with($dados);

@@ -53,6 +53,14 @@ class Categoria{
             //salva categoria
             $acao=$this->pesquisa->salvar($valores);
             
+            if($acao > 0){
+                session(['message'=>'Categoria Salva Com Sucesso!!']);
+                session(['tipoMessage'=>'1']);
+            }else{
+                session(['message'=>'Não foi possível salvar a Categoria']);
+                session(['tipoMessage'=>'2']);
+            }
+            
             //redireciona apos acao
             return redirect('/categorias');
             
@@ -69,6 +77,14 @@ class Categoria{
 
             //altera a categoria
             $acao = $this->pesquisa->alterarPorValor($valores);
+
+            if($acao > 0){
+                session(['message'=>'Categoria Alterada Com Sucesso!!']);
+                session(['tipoMessage'=>'1']);
+            }else{
+                session(['message'=>'Não foi possível alterar a Categoria']);
+                session(['tipoMessage'=>'2']);
+            }
 
             //redireciona apos acao
             return redirect('/categorias');

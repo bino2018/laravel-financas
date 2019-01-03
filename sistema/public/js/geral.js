@@ -346,13 +346,20 @@ function limparCampos(strClass, strFocus){
     }
 }
 
-function smokeAlert(texto,tipo){
+function message(msg, tipo, tempo=5000){
     try{
-        $.smkAlert({
-            text: texto,
-            type: tipo,
-            position: 'top-right',
-            time: 3
-        });
+        
+        switch(tipo){
+            case 1:
+                toastr.success(msg,'Aviso',{timeOut:tempo})
+                break;
+            case 2:
+                toastr.warning(msg,'Aviso',{timeOut:tempo})
+                break;
+            
+            default:
+                break;
+
+        }
     }catch(e){}
 }

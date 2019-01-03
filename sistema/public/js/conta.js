@@ -86,10 +86,13 @@ function respostaDeletaConta(resp){
     try{
         var jsonResp = JSON.parse(resp)
 
-        alert(jsonResp.message)
+        $('#tipo').focus()
 
         if(jsonResp.status == "1"){
+            message('Registro excluído com sucesso!!',1)
             redireciona('/contas')
+        }else{
+            message('Não foi possível excluir o registro',2)
         }
     }catch(e){}
 }
