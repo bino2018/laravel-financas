@@ -53,11 +53,12 @@ class Saldo{
     /**
     * @descript: retorna o extrato calculado
     * @author: Fernando Bino Machado
-    * @params: stdClass $dados
-    * @return: array $extrato
+    * @param: stdClass $dados
+    * @param: $tipoRetorno - quando omitido assume null, caso seja null o retorno será o array $extrato, caso seja != de null o retorno sera um float do saldo
+    * @return: array $extrato ou float $saldo dependendo do valor da variavel $tipoRetorno
     */
 
-    public function calculaExtrato($dados){
+    public function calculaExtrato($dados, $tipoRetorno=null){
         $extrato=[];
 
         $recebidos=0;
@@ -82,7 +83,11 @@ class Saldo{
 
         $extrato['detalhes'] = ['recebido'=>number_format($recebidos,2,'.',''), 'gasto'=>number_format($gastos,2,'.',''), 'saldo'=>number_format($saldo,2,'.',''),];
 
-        return $extrato;
+        if( is_null($tipoRetorno) ){
+            return $extrato;
+        }else{
+            return $saldo;
+        }
     }
 
     /**

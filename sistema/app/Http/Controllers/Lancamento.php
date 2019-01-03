@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Repositories\Pesquisa as Pes;
 use App\Http\Repositories\Conta as Con;
 use App\Http\Repositories\Lancamento as Lan;
+use App\Http\Repositories\Saldo as Sal;
 use Illuminate\Http\Request;
 use DB;
 
@@ -13,11 +14,13 @@ class Lancamento{
     private $pesquisa;
     private $conta;
     private $lancamento;
+    private $saldo;
 
     public function __construct(){
         $this->pesquisa = new Pes();
         $this->conta = new Con();
         $this->lancamento = new Lan();
+        $this->saldo = new Sal();
     }
 
     /**
@@ -50,8 +53,36 @@ class Lancamento{
     */
 
     public function salvar(Request $request){
+        
         //recebe parametros
         $params = (array) $request->all();
+
+        //verifica se o parametro valor é um numero
+        if( !isset($params['valor']) || empty($params['valor']) || !is_numeric($params['valor']) ){
+            session(['message'=>'O valor do lançamento deve ser um número...']);
+            session(['tipoMessage'=>'2']);
+            
+            return back();
+        }
+
+        //verifica se o tipo de lançamento é uma saída e se o saldo é suficiente
+        if( $params['tipo'] == 2){
+            //busca o extrato omitindo parametos para poder pegar o saldo atual geral
+            $extrato = $this->saldo->dadosParaExtrato([]);
+
+            //calcula extrato
+            $valorSaldo = $this->saldo->calculaExtrato($extrato,1);
+
+            //verifica se saldo disponível é >= ao valor enviado
+            $saldoOk = ( (float) $valorSaldo >= (float) $params['valor'] ) ? true : false;
+            
+            if( !$saldoOk ){
+                session(['message'=>'Saldo insuficiente, o saldo atual é de: R$ '.$valorSaldo]);
+                session(['tipoMessage'=>'2']);
+                
+                return back();
+            }
+        }
 
         //prepara os valores
         $valores['tabela'] = 'lancamento';
