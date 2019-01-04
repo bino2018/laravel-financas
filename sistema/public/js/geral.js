@@ -1,6 +1,11 @@
-$(function(){
-    
-})
+/**
+ * @author Fernando Bino Machado
+ * @description função modelo para requisições ajax
+ * @param {*} url - url que será requisitda
+ * @param {*} tipo - tipo pode ser get ou post
+ * @param {*} dados - quando o parametro tipo for get o tipo é um json vazio, quando for post o tipo é um json com os dados a serem enviados
+ * @param {*} callback - função utilizada para pegar o retorno do ajax
+*/
 
 function send_ajax(url, tipo, dados, callback){
     $.ajax({
@@ -18,31 +23,42 @@ function send_ajax(url, tipo, dados, callback){
     })
 }
 
+/**
+ * @author Fernando Bino Machado
+ * @description redireciona para uma determinada pagina
+ * @param {*} param - endereço para o qual sera o navegador será redirecionado
+*/
+
 function redireciona(param){
     setTimeout(function(){
         window.location.href=param
     }, 1000)
 }
 
-function listaIdsCampos(){
+/**
+ * @author Fernando Bino Machado
+ * @description recebe uma classe, percorre essa classe, monta um array com os respectivos ids
+ *  obs: a classe deve ser referente a elementos input de formulários
+ * @param {*} classe - classe que será iterada
+ * @return array lista
+*/
+
+function listaIdsCampos(classe){
     var lista = []
     
-    $(".campo").each(function(lin){
+    $('.'+classe).each(function(lin){
         lista.push($(this).attr('id'))
     })
     
     return lista
 }
 
-function montaObj(){
-    var obj = []
-
-    $(".campo").each(function(lin){
-        obj.push($(this).val())
-    })
-    
-    return obj
-}
+/**
+ * @author Fernando Bino Machado
+ * @description percorre uma determinada lista de ids e verifica se existem valores vazios
+ *  obs: os ids devem ser referente a elementos input de formulários
+ * @param {*} lista - lista de ids
+ */
 
 function camposVazios(lista){
     var vazio = false
@@ -56,51 +72,86 @@ function camposVazios(lista){
     return vazio
 }
 
+/**
+ * @author Fernando Bino Machado
+ * @description converte uma string para maiusculas, util para campos de texto em formulários
+ * @param {*} str 
+ * @return conversão de str para maiusculas
+ */
+
 function maiusculas(str){
     return str.toUpperCase()
 }
 
+/**
+ * @author Fernando Bino Machado
+ * @description verifica se um cadeia de caracteres equivale a um cpf
+ * @param {*} cpf 
+ * @return boolean valido - retorna um booleano que caracteriza o cpf como verdadeiro ou falso
+*/
+
 function validaCpf(cpf){
+    //variavel de retorno
     valido = false
 
+    //define lista prévia de cpfs inválidos, feito dessa maneira para evitar fazer assim: cpfsInvalidos = ['11111111111',...]
+    //a verificação é necessária pois a sequencia de 11 números iguais ira retornar um cpf 11111111111
+    //como verdadeiro quando na verdade é falso
     var cpfsInvalidos=[]
 
     for(var lt=0;lt<10;lt++){
         cpfsInvalidos.push(String(lt).repeat(11))
     }
 
+    //agora verifica se o cpf informado não se encontra na lista prévia de cpfs inválidos
+    //caso sim, a função para por aqui e retorna a variavel valido que ainda é false
     if(cpfsInvalidos.indexOf(cpf) == -1){
 
-        op1 = cpf.substr(0,cpf.length - 2)
-        soma1=0
-        cont1=10
+        //prepara para iniciar a validação do primeiro digito verificador
+        validacao = cpf.substr(0,cpf.length - 2)
+        calculo=0
+        contador=10
         
-        for(var i=0; i<op1.length; i++){
-            soma1 += op1[i] * cont1
-            cont1 -= 1
+        //percorre os caracters do cpf multiplicanco pelo contador que esta sendo decrescido de um em um
+        for(var i=0; i<validacao.length; i++){
+            calculo += validacao[i] * contador
+            contador -= 1
         }
         
-        ver1 = (soma1 * 10) % 11
-        dg1 = ver1
+        //pega o resto da divisao do calculo multiplicado por 10 e atribui ao digitoVerificador
+        divisao = (calculo * 10) % 11
+        digitoVerificador = divisao
         
-        if(ver1 == 10){
-            dg1=0		
+        //caso a divisão seja igual a 10 força o digito verificador a ser 0
+        if(divisao == 10){
+            digitoVerificador=0		
         }
-        if(dg1 == cpf[9]){
-            soma2=0
-            cont2=11
-            for(var j=0; j<op1.length + 1; j++){
-                soma2 += cpf[j] * cont2
-                cont2 -= 1
-            }
-            ver2 = (soma2 * 10) % 11
+
+        //agora verifica se o primeiro digito verificado equivale ao corresponte no cpf original passado como parametro
+        //caso seja diferente a função para por aqui retornando a variavel valido que ainda é false
+        if(digitoVerificador == cpf[9]){
             
-            dg2 = ver2
-            
-            if(ver2 == 10){
-                dg2=0
+            //sobreescreve as variveis para iniciar verificação do segundo digito validador
+            calculo=0
+            contador=11
+
+            for(var j=0; j<validacao.length + 1; j++){
+                calculo += cpf[j] * contador
+                contador -= 1
             }
-            if(dg2 == cpf[10]){
+            
+            //sobresreve a divisão 
+            divisao = (calculo * 10) % 11
+            digitoVerificador = divisao
+            
+            //caso a divisão seja igual a 10 força o digito verificador a ser 0
+            if(divisao == 10){
+                digitoVerificador=0
+            }
+
+            //finalmente após ter verificado e validado o segundo digito validador
+            //altera a var valido para true para função poder retornar true para o cpf
+            if(digitoVerificador == cpf[10]){
                 valido=true
             }
         }
@@ -109,65 +160,7 @@ function validaCpf(cpf){
     return valido
 }
 
-function numeroDecimal(strNum){
-    var num = NaN
-    
-    try{
-        var floatNum = parseFloat(strNum)
-        
-        num = floatNum
 
-    }catch(e){
-        
-    }
-    
-    return num
-
-}
-
-function testeNumeroDecimal(num){
-    var teste = false
-
-    try{
-        var num = num / 10
-
-        var testeNum = parseInt(num)
-        
-        if(testeNum > 0){
-            teste = true
-        }else{
-            teste = false
-        }
-
-    }catch(e){
-        teste = false
-    }
-
-    return teste
-}
-
-function numero(strnum){
-    var nums=["0","1","2","3","4","5","6","7","8","9"]
-    var strFiltro=""
-    for(var i=0;i<strnum.length;i++){
-        if(nums.indexOf(strnum[i]) != -1){
-            strFiltro += strnum[i]
-        }
-    }
-    return strFiltro
-}
-
-function recebeCep(dados){
-    if(dados.logradouro != undefined && dados.logradouro != ""){
-        $("#cplogradouro").val(dados.logradouro)
-        $("#cpbairro").val(dados.bairro)
-        $("#cpcidade").val(dados.localidade)
-        $("#cpestado").val(dados.uf)
-        $("#cpnumero").focus()
-    }else{
-        alert("Não foi possível localizar o Cep informado")
-    }
-}
 
 function validaCnpj(cnpj){
     var valido = false
@@ -226,17 +219,6 @@ function validaCnpj(cnpj){
 
     return valido
 
-}
-
-function bloquear(lista, foc){
-    $(".campo").prop("disabled", false)
-    $("button").prop("disabled", false)
-
-    lista.forEach(function(campo, num){
-        $(campo).prop("disabled", true)
-    })
-
-    $(foc).focus()
 }
 
 function validaEmail(email) {
