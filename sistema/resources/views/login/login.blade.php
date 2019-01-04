@@ -23,7 +23,10 @@
                 <br>
                 <div class="row">
                     <div class="col-sm-12 col-xs-12">
-                        <button class="btn btn-defaul btn-sm form-control bg-dark text-light" style="font-size: 16pt;">Acessar Sistema</button>
+                        <button class="btn btn-defaul btn-sm form-control bg-dark text-light" style="font-size: 16pt;">
+                            Acessar Sistema
+                            <i class="fas fa-key" style="font-size: 20pt; float: right; margin-top 0pt;"></i>
+                        </button>
                     </div>
                 </div>
             </form>

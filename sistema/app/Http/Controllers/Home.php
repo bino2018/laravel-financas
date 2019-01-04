@@ -47,6 +47,10 @@ class Home{
     * @return: view, redirect
     */
     public function validaLogin(Request $request){
+        //inicia session para mensagens
+        $request->session()->put('message','');
+        $request->session()->put('tipoMessage','2');
+
         //recebe parametros
         $params = (array) $request->all();
         
@@ -69,11 +73,20 @@ class Home{
             );
             
             if($criaPermissao){
+                session(['message'=>'']);
+                session(['tipoMessage'=>'1']);
+
                 return redirect('/sistema');
             }else{
+                session(['message'=>'Login invalido!!']);
+                session(['tipoMessage'=>'2']);
+
                 return redirect('/login');
             }
         }else{
+            session(['message'=>'Login invalido!!']);
+            session(['tipoMessage'=>'2']);
+
             return redirect('/login');
         }
 

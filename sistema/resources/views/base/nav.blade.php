@@ -10,7 +10,7 @@
 
     <div class="col-sm-1 col-xs-12">
         <div class="btn-group">
-            <a href="/login" class="btn btn-default btn-sm text-light"> Login</a>
+            <a href="/login" class="btn btn-default btn-sm text-light"> Login <i class="fas fa-key"></i></a>
         </div>
     </div>
 </nav>

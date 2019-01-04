@@ -109,7 +109,7 @@
                                 <td>R$ {{$resumo['pendentes']['pendentes']['a_pagar']}}</td>
                             </tr>
                             <tr>
-                                <td>Previsão: </td>
+                                <td>Previsão de Saldo: </td>
                                 <td>R$ {{$valorPrevisao}}</td>
                             </tr>
                         </table>

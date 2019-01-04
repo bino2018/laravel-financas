@@ -28,9 +28,6 @@ class Permissao{
             $request->session()->put('autenticado',$permissoes);
         }
 
-        $request->session()->put('message','');
-        $request->session()->put('tipoMessage','1');
-
         return true;
     }
 
