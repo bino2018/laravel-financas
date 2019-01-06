@@ -102,26 +102,50 @@ function configsInicio(){
 
         //json com itens para execução dessa função
         var configFunc = {
-            parametros: JSON.parse( $('#parametros').val() )
+            parametros: JSON.parse( $('#parametros').val() ),
+            contaCampos: 0
         }
         
         //configura parametros do filtro na paginação
-        if( configFunc.parametros != undefined && configFunc.parametros != "" ){
+        if( configFunc.parametros._token != undefined && configFunc.parametros._token != "" ){
             
             //percorre os links
             $('a').each(function(i){
                 
+                configFunc.contaCampos = 0
+
                 //verifica se é um link de paginação
                 if( $(this).attr('class') == 'page-link' ){
                     
                     //configura url com os parametros do filtro
                     var url = $(this).attr('href')
                     var novaUrl = url
+
+
                     
-                    novaUrl += '&dtinicio='+configFunc.parametros.dtinicio
-                    novaUrl += '&dtfinal='+configFunc.parametros.dtfinal
-                    novaUrl += '&descricao='+configFunc.parametros.descricao
-                    novaUrl += '&tipo='+configFunc.parametros.tipo
+                    if(configFunc.parametros.dtinicio != undefined && configFunc.parametros.dtinicio != null){
+                        novaUrl += '&dtinicio='+configFunc.parametros.dtinicio
+                        configFunc.contaCampos += 1
+                    }
+                    
+                    if(configFunc.parametros.dtfinal != undefined && configFunc.parametros.dtfinal != null){
+                        novaUrl += '&dtfinal='+configFunc.parametros.dtfinal
+                        configFunc.contaCampos += 1
+                    }
+
+                    if(configFunc.parametros.descricao != undefined && configFunc.parametros.descricao != null){
+                        novaUrl += '&descricao='+configFunc.parametros.descricao
+                        configFunc.contaCampos += 1
+                    }
+
+                    if(configFunc.parametros.tipo != undefined && configFunc.parametros.tipo != null){
+                        novaUrl += '&tipo='+configFunc.parametros.tipo
+                        configFunc.contaCampos += 1
+                    }
+
+                    if(configFunc.contaCampos > 0){
+                        novaUrl += '&_token='+configFunc.parametros._token
+                    }
 
                     //aplica nova url no link de paginação
                     $(this).attr('href', novaUrl)

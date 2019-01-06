@@ -42,6 +42,12 @@ class Lancamento{
 
         //busca ultimos lançamentos
         $data['lancamentos'] = $this->lancamento->listarLancamentos(['periodo'=>'150', 'data'=>$params]);
+        
+        //verifica se existem lançamentos e exibe mensagem se necessário
+        if( !count($data['lancamentos']) ){
+            session(['message'=>'Nenhum Lançamento encontrado...']);
+            session(['tipoMessage'=>'3']);
+        }
 
         //mantem os paramtros da busca
         $data['parametros'] = json_encode($params);

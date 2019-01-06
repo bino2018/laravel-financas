@@ -89,9 +89,6 @@ $(function(){
 
 function configsInicio(){
     try{
-        //gera o grefico
-        grafico()
-
         $('#categoria').focus()
     }catch(e){}
 }
