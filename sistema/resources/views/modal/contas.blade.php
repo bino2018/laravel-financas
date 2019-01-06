@@ -1,10 +1,16 @@
 <div class="modal" style="display:none;">
     <div class="panel-modal">
-        <nav class="navbar navbar-default nav-dash panel-nav">
-            <h5 class="text text-secondary titulo-dash">Distribuição de Contas</h5>
-            <span id="close-modal" class="btn btn-default btn-sm bg-dark text-light">X</span>
-        </nav>
-        <br>
+        <div class="row">
+            <div class="col-sm-11">
+                <h5 class="text text-secondary titulo-dash">Distribuição de Contas</h5>
+            </div>
+            <div class="col-sm-1">
+                <center><span id="close-modal" class="btn btn-default btn-sm bg-dark text-light">X</span></center>
+            </div>
+        </div>
+        
+        <hr>
+
         <div class="row">
             <div class="col-sm-6 panel-table">
                 <h5 class="text text-secondary">Lista de Recebimentos</h5><br>

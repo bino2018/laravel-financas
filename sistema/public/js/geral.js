@@ -1,3 +1,4 @@
+
 /**
  * @author Fernando Bino Machado
  * @description função modelo para requisições ajax
@@ -273,9 +274,7 @@ function gerarGraficoPadrao(strTipo, strTitulo, arrLabels, arrDatasets, idCanvas
             .css("width","100%")
             .css("background-color","#f1f1f1")
             
-    }catch(e){
-
-    }
+    }catch(e){}
 }
 
 function gerarGraficoLine(strTitulo, arrLabels, arrDatasets, idCanvas){
@@ -306,9 +305,7 @@ function gerarGraficoLine(strTitulo, arrLabels, arrDatasets, idCanvas){
             .css("margin-top","-19px")
             .css("background-color","#f1f1f1")
 
-    }catch(e){
-
-    }
+    }catch(e){}
 }
 
 function limparCampos(strClass, strFocus){
@@ -323,12 +320,18 @@ function limparCampos(strClass, strFocus){
         })
 
         $("#"+strFocus).focus()
-    }catch(e){
-
-    }
+    }catch(e){}
 }
 
-function message(msg, tipo, tempo=5000){
+/**
+ * @description exibe mensagens padronizadas conforme a biblioteca toastr.js
+ * @author Fernando Bino Machado
+ * @param {*} msg - da mensagem que será exibida, quando omitido assume "" por defualt
+ * @param {*} tipo - tipo de mensagem pode ser 1 para success 2 para warning 3 para info, quando omitido assume 3 por default
+ * @param {*} tempo - para cada segundo utilize 1000, quando omitido assume 5000 por default
+ */
+
+function message(msg="Acao bem sucedida!!", tipo=3, tempo=5000){
     try{
         
         switch(tipo){
@@ -338,10 +341,13 @@ function message(msg, tipo, tempo=5000){
             case 2:
                 toastr.warning(msg,'Aviso',{timeOut:tempo})
                 break;
-            
+            case 3:
+                toastr.info(msg,'Informação',{timeOut:tempo})
+                break;
             default:
                 break;
 
         }
+
     }catch(e){}
 }

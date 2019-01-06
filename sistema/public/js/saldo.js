@@ -4,7 +4,7 @@ $(function(){
 })
 
 /**
-* @descript: aplica configurações iniciais
+* @description: aplica configurações iniciais
 * @author: Fernando Bino Machado
 * @params: 
 * @return: 

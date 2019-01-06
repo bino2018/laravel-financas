@@ -15,7 +15,7 @@
                         <h5 class="text text-secondary">Novo Lançamento</h5>
                     </div>
                     <div class="col-sm-3">
-                        <span id="open-modal" class="btn btn-default bg-dark text-light btn-sm">Pesquisar Conta</span>
+                        
                     </div>
                 </div>
                 
@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-sm-2">      
                             </div>
-                        </div>    
+                        </div>
                         
                         <input type="hidden" id="conta" name="conta" value="0">
 
@@ -62,21 +62,106 @@
                                 <input type="number" id="valor" name="valor" step="0.01" class="form-control form-control-sm" placeholder="Valor do Lançamento" required>
                             </div>
                             <div class="col-sm-2">    
+                            </div>
+                        </div>
+                        
+                        <hr> 
+
+                        <div class="row">
+                            <div class="col-sm-7">
+                            </div>
+                            <div class="col-sm-3">
+                                <span id="open-modal" class="btn btn-default bg-dark text-light btn-sm">Pesquisar Conta</span>
+                            </div>
+                            <div class="col-sm-2">    
                                 <button class="btn btn-success btn-sm text-light">Salvar</button>      
                             </div>
-                        </div>    
+                        </div>
                     </form>
                 </div>
             </div>
 
             <div class="col-sm-5">
-                
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h5 class="text text-secondary">Filtrar Lançamentos</h5>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="card card-cadastro">
+                    <form action="/lancamentos" method="post">
+                        <input type="hidden" id="tkn" name="_token" value="{!!csrf_token()!!}">
+                        
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label class="label-form" for="valor">Data Inicial (*)</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="date" name="dtinicio" id="dtinicio" class="form-control form-control-sm">
+                            </div>
+                        </div>    
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label class="label-form" for="valor">Data Final (*)</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="date" name="dtfinal" id="dtfinal" class="form-control form-control-sm">
+                            </div>
+                        </div>    
+
+                        <div class="row">
+                        <div class="col-sm-5">
+                                <label class="label-form" for="filtro-descricao">Descrição</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <input type="text" id="filtro-descricao" name="descricao" class="form-control form-control-sm" maxlength="30" placeholder="Descrição do Lançamento">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <label class="label-form" for="dia">Tipo (*)</label>
+                            </div>
+                            <div class="col-sm-7">
+                                <select name="tipo" id="filtro-tipo" class="form-control form-control-sm">
+                                    <option value="">Selecione</option>
+                                    <option value="1">Entradas</option>
+                                    <option value="2">Saidas</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                            </div>
+                            <div class="col-sm-7">    
+                                <button class="btn btn-success btn-sm text-light form-control form-control-sm">Filtrar</button>      
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             </div>
         </div>
         <hr>
         <div class="row">
             <div class="col-sm-12 panel-table">
-                <h5 class="text text-secondary">Ultimos Lançamentos</h5>
+
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h5 class="text text-secondary">Ultimos Lançamentos</h5>
+                    </div>
+                    <div class="col-sm-3">
+                        @if( isset($lancamentos) && count($lancamentos) )
+                            {!! $lancamentos->links() !!}
+                        @endif
+                    </div>
+                </div>
 
                 <table class="table table-sm table-bordered">
                     <thead>
@@ -112,6 +197,14 @@
                         @endif
                     </tbody>
                 </table>
+                <div class="row">
+                    <div class="col-sm-9">
+                    </div>
+                    <div class="col-sm-3">
+                        {!! $lancamentos->links() !!}
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

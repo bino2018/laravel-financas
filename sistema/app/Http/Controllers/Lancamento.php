@@ -30,7 +30,9 @@ class Lancamento{
     * @return: view
     */
 
-    public function index(){
+    public function index(Request  $request){
+        //recebe os parametros se existirem
+        $params = $request->all();
         
         //busca contas a receber
         $data['contasReceber'] = $this->conta->listarContas(['periodo'=>'300', 'tipo'=>'1', 'data'=>'0']);
@@ -39,7 +41,7 @@ class Lancamento{
         $data['contasPagar'] = $this->conta->listarContas(['periodo'=>'300', 'tipo'=>'2', 'data'=>'0']);
 
         //busca ultimos lançamentos
-        $data['lancamentos'] = $this->lancamento->listarLancamentos(['periodo'=>'150', 'tipo'=>'', 'data'=>'0']);
+        $data['lancamentos'] = $this->lancamento->listarLancamentos(['periodo'=>'150', 'data'=>$params]);
         
         return view('lancamento.index')->with($data);
         

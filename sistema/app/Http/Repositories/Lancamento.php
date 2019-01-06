@@ -16,24 +16,40 @@ class Lancamento{
     * @description: retorna os ultimos lançamentos em um período
     * @author: Fernando Bino Machado
     * @params: array $params[periodo,tipo,data]
-    * @return: stdClass $lancamentos
+    * @return: stdClass $lancamentos stdClass é o resultado da pesquisa por lançamentos no banco
     */
 
     public function listarLancamentos($params){
-        //definir o período para pesquisa
-        $periodo = $this->periodo->definePeriodoUltimosDias($params['periodo']);
         
         //busca os lançamentos
         $lancamentos = DB::table('lancamento')->select();
-
-        //verifica se foi enviado algum tipo para pesquisa dos lançamentos
-        if( isset($params['tipo']) && !empty($params['tipo']) ){
-            $lancamentos = $lancamentos->where('tpLancamento',$params['tipo']);
+        
+        //define o periodo, se as datas foram enviadas monta o periodo com as datas enviadas, se não monta periodo padrão
+        if( isset($params['data']['dtinicio']) && !empty($params['data']['dtinicio']) && isset($params['data']['dtfinal']) && !empty($params['data']['dtfinal']) ){
+            $periodo = $this->periodo->preparaDatas($params['data']['dtinicio'], $params['data']['dtfinal']);
+        }else{
+            $periodo = $this->periodo->definePeriodoUltimosDias($params['periodo']);
+        }
+        
+        //filtra por período
+        $lancamentos = $lancamentos->where('dtLancamento','>=',$periodo['inicial']);
+        $lancamentos = $lancamentos->where('dtLancamento','<=',$periodo['final']);
+        
+        //filtra por descrição do lançamento
+        if( isset($params['data']['descricao']) && !empty($params['data']['descricao']) ){
+            $lancamentos = $lancamentos->where('nmLancamento', 'LIKE', '%'.$params['data']['descricao'].'%');
+        }
+        
+        //filtra por tipo de lançamento
+        if( isset($params['data']['tipo']) && !empty($params['data']['tipo']) ){
+            $lancamentos = $lancamentos->where('tpLancamento',$params['data']['tipo']);
         }
 
         //finaliza pesquisa
-        $lancamentos = $lancamentos->orderBy('dtLancamento','desc')->get();
-
+        $lancamentos = $lancamentos->orderBy('dtLancamento','desc');
+        $lancamentos = $lancamentos->paginate(5);
+        
+        
         //retorna lançamentos
         return $lancamentos;
     }

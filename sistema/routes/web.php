@@ -64,8 +64,11 @@
 
 //LANÇAMENTOS
 
-    //View lançamentos
+    //View Lançamentos
     Route::get('/lancamentos','Lancamento@index')->middleware(['validar']);
+
+    //View Lancamentos com filtro
+    Route::post('/lancamentos','Lancamento@index')->middleware(['validar']);
 
     //Salva um lançamento
     Route::post('/salvar-lancamento', 'Lancamento@salvar')->middleware(['validar']);

@@ -87,7 +87,7 @@ class Conta{
     /**
     * @description: Organiza as contas em meses
     * @author: Fernando Bino Machado
-    * @params: stdClass $result
+    * @params: stdClass $result onde stdClass é o resultado da pesquisa por contas no banco
     * @return: array $meses
     */
 

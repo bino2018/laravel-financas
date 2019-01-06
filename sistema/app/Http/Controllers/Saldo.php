@@ -14,7 +14,7 @@ class Saldo{
     }
 
     /**
-    * @descript: retorna a view saldo.index
+    * @description: retorna a view saldo.index
     * @author: Fernando Bino Machado
     * @params: Request $request
     * @return: view

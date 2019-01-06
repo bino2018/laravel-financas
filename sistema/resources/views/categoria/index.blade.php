@@ -42,7 +42,8 @@
                 </div>    
             </div>
         </div>
-        <hr>
+
+        <!-- <hr>
         <input type="hidden" id="dados" value="{{json_encode($data['categorias'])}}">
         <div class="row">
             <div class="col-sm-12">
@@ -50,7 +51,8 @@
 
                 </canvas>
             </div>
-        </div>
+        </div> -->
+        
         <hr>
         <div class="row">
             <div class="col-sm-12 panel-table">

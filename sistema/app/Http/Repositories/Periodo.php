@@ -45,7 +45,7 @@ class Periodo{
         
         $data = new DateTime();
 
-        $dtHoje = $data->format('Y-m-d H:i:s');
+        $dtHoje = $data->format('Y-m-d')." 23:59:59";
 
         $numDias = (int) ceil($dias);
         
@@ -80,7 +80,7 @@ class Periodo{
 
         $dtAdicionada = $data->add($intervalo);
 
-        $dtFinal = $dtAdicionada->format('Y-m-d H:i:s');
+        $dtFinal = $dtAdicionada->format('Y-m-d')." 23:59:59";
 
         return ['inicial'=>$dtHoje, 'final'=>$dtFinal];
     }
@@ -110,6 +110,41 @@ class Periodo{
         
         return $anos;
 
+    }
+
+    /**
+     * @description: recebe duas datas e as retorna ordenadas e formatadas para poder fazer buscas no banco
+     * @author: Fernando Bino Machado
+     * @param: string $dt1 - string a ser formatada como data
+     * @param: string $dt2 - string a ser formatada como data
+     * @return: array $periodo[inicial,final]
+    */
+
+    public function preparaDatas($dt1,$dt2){
+        //cria as datas
+        $data1 = new DateTime($dt1);
+        $data2 = new DateTime($dt2);
+
+        //compara e ordena
+        if( $data1->getTimestamp() < $data2->getTimestamp() ){
+            $periodo = [
+                'inicial'=>$data1->format('Y-m-d H:i:s'),
+                'final'=>$data2->format('Y-m-d H:i:s')
+            ];
+        }else{
+            $periodo = [
+                'inicial'=>$data2->format('Y-m-d H:i:s'),
+                'final'=>$data1->format('Y-m-d H:i:s')
+            ];
+        }
+
+        //sobreescreve a segunda data caso o formato de horas esteja zerado
+        if( $data2->format('H:i:s') == "00:00:00" ){
+            $periodo['final'] = $data2->format('Y-m-d')." 23:59:59";
+        }
+        
+        //retorna as perio$periodo
+        return $periodo;
     }
 
 

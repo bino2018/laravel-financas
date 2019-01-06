@@ -15,7 +15,7 @@ class Categoria{
     /**
      * @description: faz a agregação de valores por categoria, retorna um array com as categorias e as os tres itens de calculo, entradas,saidas,saldo
      * @author: Fernando Bino Machado
-     * @params: stdClass
+     * @params: stdClass onde stdClass é o resultado da pesquisa de categorias no banco
      * @return: array $calculo
     */
 

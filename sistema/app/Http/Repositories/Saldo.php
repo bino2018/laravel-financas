@@ -13,7 +13,7 @@ class Saldo{
     }
 
     /**
-    * @descript: retorna lista para calcular extrato
+    * @description: retorna lista para calcular extrato
     * @author: Fernando Bino Machado
     * @params: array $params
     * @return: array $extrato
@@ -51,9 +51,9 @@ class Saldo{
 
 
     /**
-    * @descript: retorna o extrato calculado
+    * @description: retorna o extrato calculado
     * @author: Fernando Bino Machado
-    * @param: stdClass $dados
+    * @param: stdClass $dados onde stdClass é o resultado da pesquisa por lançamentos no banco
     * @param: $tipoRetorno - quando omitido assume null, caso seja null o retorno será o array $extrato, caso seja != de null o retorno sera um float do saldo
     * @return: array $extrato ou float $saldo dependendo do valor da variavel $tipoRetorno
     */
@@ -91,9 +91,9 @@ class Saldo{
     }
 
     /**
-    * @descript: calcula contas pendentes(tanto recebimentos como pagamentos)
+    * @description: calcula contas pendentes(tanto recebimentos como pagamentos)
     * @author: Fernando Bino Machado
-    * @params: stdClass $dados
+    * @params: stdClass $dados onde stdClass é o resultado da pesquisa por lançamentos no banco
     * @return: array $pendentes
     */
 
