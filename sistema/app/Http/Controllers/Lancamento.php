@@ -42,7 +42,10 @@ class Lancamento{
 
         //busca ultimos lançamentos
         $data['lancamentos'] = $this->lancamento->listarLancamentos(['periodo'=>'150', 'data'=>$params]);
-        
+
+        //mantem os paramtros da busca
+        $data['parametros'] = json_encode($params);
+
         return view('lancamento.index')->with($data);
         
     }

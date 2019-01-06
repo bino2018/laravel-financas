@@ -66,10 +66,11 @@
 }
 /* Tabelas em Geral */
 table{
-    font-size: 10pt;
+    font-size: 9pt;
 }
 table thead td{
     background-color: #f1f1f1;
+    font-weight: bold;
 }
 
 /* Marcações de Status em registros nas tabelas */

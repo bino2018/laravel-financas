@@ -150,6 +150,13 @@
         </div>
         <hr>
         <div class="row">
+
+            @if( isset($parametros) && !empty($parametros) )
+                <input type="hidden" id="parametros" value="{{$parametros}}">
+            @else
+                <input type="hidden" id="parametros" value="">
+            @endif
+
             <div class="col-sm-12 panel-table">
 
                 <div class="row">

@@ -82,6 +82,7 @@ $(function(){
         //envia para requisição ajax com callback
         send_ajax('/deletar-lancamento','post', obj, respostaDeletaOrcamento)
     }
+
 })
 
     configsInicio()
@@ -89,14 +90,48 @@ $(function(){
 
 /**
 * @description: aplica configuraçõe iniciais
+* 1 configura os links de paginação com parametros do filtro
+* 2 move o foco no campo tipo do form de lançamentos
 * @author: Fernando Bino Machado
-* @params: 
-* @return:
 */
 
 function configsInicio(){
     try{
+    
+    //1 configura os links de paginação com parametros do filtro
+
+        //json com itens para execução dessa função
+        var configFunc = {
+            parametros: JSON.parse( $('#parametros').val() )
+        }
+        
+        //configura parametros do filtro na paginação
+        if( configFunc.parametros != undefined && configFunc.parametros != "" ){
+            
+            //percorre os links
+            $('a').each(function(i){
+                
+                //verifica se é um link de paginação
+                if( $(this).attr('class') == 'page-link' ){
+                    
+                    //configura url com os parametros do filtro
+                    var url = $(this).attr('href')
+                    var novaUrl = url
+                    
+                    novaUrl += '&dtinicio='+configFunc.parametros.dtinicio
+                    novaUrl += '&dtfinal='+configFunc.parametros.dtfinal
+                    novaUrl += '&descricao='+configFunc.parametros.descricao
+                    novaUrl += '&tipo='+configFunc.parametros.tipo
+
+                    //aplica nova url no link de paginação
+                    $(this).attr('href', novaUrl)
+                }
+            })
+        }
+    
+    //2 move o foco no campo tipo do form de lançamentos
         $('#tipo').focus()
+
     }catch(e){}
 }
 
