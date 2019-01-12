@@ -41,8 +41,8 @@ class Conta{
             //estabelece período conforme os dias recebidos
             $dias = (int) $numDias / 2;
             $datas = [
-                'inicial'=>$this->periodo->definePeriodoUltimosDias($dias),
-                'final'=>$this->periodo->definePeriodoProximosDias($dias)
+                'inicial'=>$this->periodo->montaPeriodo(['qtdeUnidade'=>$dias,'formato'=>'D']),
+                'final'=>$this->periodo->montaPeriodo(['qtdeUnidade'=>$dias,'formato'=>'D','retorno'=>'futuro'])
             ];
         }
         

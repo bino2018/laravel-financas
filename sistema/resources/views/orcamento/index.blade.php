@@ -141,8 +141,16 @@
         <hr>
         <div class="row">
             <div class="col-sm-6 panel-table">
-                <h5 class="text text-secondary">Lista Itens Orçamento de Entradas</h5>
-
+                
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h5 class="text text-secondary">Lista Itens Orçamento de Entradas</h5>
+                    </div>
+                    <div class="col-sm-5">
+                        {!! $orcamentosEntradas->links() !!}
+                    </div>
+                </div>
+                
                 <table class="table table-sm table-bordered">
                     <thead>
                         <tr>
@@ -199,7 +207,15 @@
             </div>
 
             <div class="col-sm-6 panel-table">
-                <h5 class="text text-secondary">Lista Itens Orçamento de Saídas</h5>
+                
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h5 class="text text-secondary">Lista Itens Orçamento de Saídas</h5>
+                    </div>
+                    <div class="col-sm-5">
+                        {!! $orcamentosSaidas->links() !!}
+                    </div>
+                </div>
 
                 <table class="table table-sm table-bordered">
                     <thead>

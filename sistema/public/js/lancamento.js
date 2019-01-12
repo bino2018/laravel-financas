@@ -111,11 +111,12 @@ function configsInicio(){
             
             //percorre os links
             $('a').each(function(i){
-                
+                var classe = $(this).attr('class')
+
                 configFunc.contaCampos = 0
 
                 //verifica se é um link de paginação
-                if( $(this).attr('class') == 'page-link' ){
+                if( classe.indexOf('page-link') != -1 ){
                     
                     //configura url com os parametros do filtro
                     var url = $(this).attr('href')

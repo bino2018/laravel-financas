@@ -36,7 +36,7 @@ class Saldo{
         //configura query com parametros
         if( isset($params) && count($params) ){
             //definir periodo
-            $periodo = $this->periodo->definePeriodoUltimosDias($params['dias']);
+            $periodo = $this->periodo->montaPeriodo( ['qtdeUnidade'=>$params['dias'],'formato'=>'D']);
 
             //aplica periodo na query
             $extrato = $extrato->where('l.dtLancamento','>=',$periodo['inicial']);

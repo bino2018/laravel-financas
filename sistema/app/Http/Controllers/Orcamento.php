@@ -60,7 +60,7 @@ class Orcamento{
                             ->where('c.cdStatus','=','1')
                             ->where('o.tpOrcamento','=','1')
                             ->orderBy('o.dia')
-                            ->get();
+                            ->paginate(4);
         
         //pega lista de orçamentos entradas
         $data['orcamentosSaidas'] = DB::table('orcamento as o')
@@ -80,7 +80,7 @@ class Orcamento{
                             ->where('c.cdStatus','=','1')
                             ->where('o.tpOrcamento','=','2')
                             ->orderBy('o.dia')
-                            ->get();
+                            ->paginate(4);
 
         //monta os dias de referencia
         $data['dias']=[];

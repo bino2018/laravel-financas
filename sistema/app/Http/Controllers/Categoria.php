@@ -169,13 +169,14 @@ class Categoria{
                 ]);
         }else{
             return json_encode(
-                [
+                    [
                     'message'=>'Erro ao tentar alterar status da categoria',
                     'status'=>'0',
                     'check'=>$params['check'],
                     'paramStatus'=>$status,
                     'checaco'=>$checado
-                    ]);
+                    ]
+                );
         }
     }
 }

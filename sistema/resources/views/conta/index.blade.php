@@ -73,11 +73,21 @@
 
             <div class="col-sm-4">
                 <div class="row">
-                    <div class="col-sm-7">
+                    <div class="col-sm-4">
                         <h5 class="text text-secondary">Resumo</h5>
                     </div>
-                    <div class="col-sm-5">
-                        <a href="/lancamentos" class="btn btn-default btn-sm bg-dark text-light">Lançamentos</a>
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <form action="/gerar-contas" method="post">
+                                    <input type="hidden" name="_token" value="{!!csrf_token()!!}">
+                                    <button class="btn btn-default btn-sm bg-dark text-light">Gerar Contas</button>  
+                                </form>
+                            </div>
+                            <div class="col-sm-5">
+                                <a href="/lancamentos" class="btn btn-default btn-sm bg-dark text-light">Lançamentos</a>
+                            </div>
+                        </div>
                     </div>
                 </div> 
                 <br>

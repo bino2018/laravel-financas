@@ -26,9 +26,9 @@ class Lancamento{
         
         //define o periodo, se as datas foram enviadas monta o periodo com as datas enviadas, se não monta periodo padrão
         if( isset($params['data']['dtinicio']) && !empty($params['data']['dtinicio']) && $params['data']['dtinicio'] != "null" && isset($params['data']['dtfinal']) && !empty($params['data']['dtfinal']) && $params['data']['dtfinal'] != "null" ){
-            $periodo = $this->periodo->preparaDatas($params['data']['dtinicio'], $params['data']['dtfinal']);
+            $periodo = $this->periodo->preparaDatas( [ $params['data']['dtinicio'], $params['data']['dtfinal'] ] );
         }else{
-            $periodo = $this->periodo->definePeriodoUltimosDias($params['periodo']);
+            $periodo = $this->periodo->montaPeriodo( ['qtdeUnidade'=>$params['periodo'],'formato'=>'D'] );
         }
         
         //filtra por período

@@ -1,3 +1,27 @@
+$(function(){
+    configGeral();
+})
+
+/**
+ * @author Fernando Bino Machado
+ * @description aplica configurações universais que poderão ocorrer em todas as interfaces
+*/
+
+function configGeral(){
+    try{
+        //altera as classes das paginaçãoes default do laravel
+        $('ul.pagination').each(function(i){
+            if( $(this).html() != undefined && $(this).html() != "" ){
+                $(this).addClass(' pagination-sm')
+            }
+        })
+
+        $('ul.pagination a').addClass('text text-secondary')
+        $('ul.pagination li.active span.page-link').css('border','1px solid #ffffff')
+        $('ul.pagination li.active span.page-link').addClass('bg-dark')
+
+    }catch(e){}
+}
 
 /**
  * @author Fernando Bino Machado

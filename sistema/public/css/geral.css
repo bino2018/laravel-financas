@@ -50,6 +50,7 @@
     height: 30px;
     padding: 2px;
     background-color: #f1f1f1;
+    margin-top: 10px;
     margin-left: -3px;
     margin-right: 10px;
 }
@@ -69,6 +70,10 @@ table{
     font-size: 9pt;
 }
 table thead td{
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+tr.dados-info td{
     background-color: #f1f1f1;
     font-weight: bold;
 }

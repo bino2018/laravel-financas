@@ -34,7 +34,7 @@
             <div class="col-sm-5">
                 <div class="row">
                     <div class="col-sm-8">
-                        <h5 class="text text-secondary">Total Categorias: {{count($data['categorias'])}}</h5>
+                        <!--<h5 class="text text-secondary">Total Categorias: count($data['categorias'])</h5>-->
                     </div>
                     <div class="col-sm-4">
                         <a href="/orcamentos" class="btn btn-default btn-sm bg-dark text-light">Orçamentos</a>
@@ -72,8 +72,12 @@
                     <tbody>
                         @if( isset($data['categorias']) )
                             @foreach( $data['categorias'] as $num => $val )
-                                <tr>
-                                    <td>{{$val->nmCategoria}}</td>
+                                @if( $val['cdCategoria'] == 0 )
+                                    <tr class='dados-info'>
+                                @else
+                                    <tr>
+                                @endif
+                                    <td>{{$val['nmCategoria']}}</td>
                                     @php
                                         $checado = "";
                                         $dataStatus = "2";
@@ -81,7 +85,7 @@
                                         $title = "Altera o status para On";
                                         $text = "Off";
 
-                                        if($val->cdStatus == "1"){
+                                        if($val['cdStatus'] == "1"){
                                             $checado = "checked";
                                             $dataStatus = "1";
                                             $classe = "lb-status-on";
@@ -90,21 +94,25 @@
                                         }
                                     @endphp
 
-                                    <td>{{$val->entradas}}</td>
-                                    <td>{{$val->saidas}}</td>
-                                    <td>{{$val->saldo}}</td>
+                                    <td>{{$val['entradas']}}</td>
+                                    <td>{{$val['saidas']}}</td>
+                                    <td>{{$val['saldo']}}</td>
 
                                     <td>
-                                        <center>
-                                            <input id="check{{$num}}" type="checkbox" class="checks" data-cd="{{$val->cdCategoria}}" data-st="{{$dataStatus}}" {{$checado}} style="display: none;">
-                                            <label id="lab{{$num}}" class="{{$classe}}" for="check{{$num}}" title="{{$title}}">{{$text}}</label>
-                                        </center>
+                                        @if( $val['cdCategoria'] != 0 )
+                                            <center>
+                                                <input id="check{{$num}}" type="checkbox" class="checks" data-cd="{{$val['cdCategoria']}}" data-st="{{$dataStatus}}" {{$checado}} style="display: none;">
+                                                <label id="lab{{$num}}" class="{{$classe}}" for="check{{$num}}" title="{{$title}}">{{$text}}</label>
+                                            </center>
+                                        @endif
                                     </td>
                                     <td>
-                                        <center>
-                                            <span class="btn btn-default btn-sm bg-dark text-light bt-editar" title="Editar Categoria" data-cd="{{$val->cdCategoria}}" data-nm="{{$val->nmCategoria}}">Editar</span>
-                                            <span class="btn btn-default btn-sm bg-dark text-light bt-excluir" title="Remover Categoria" data-cd="{{$val->cdCategoria}}">X</span>
-                                        </center>
+                                        @if( $val['cdCategoria'] != 0 )
+                                            <center>
+                                                <span class="btn btn-default btn-sm bg-dark text-light bt-editar" title="Editar Categoria" data-cd="{{$val['cdCategoria']}}" data-nm="{{$val['nmCategoria']}}">Editar</span>
+                                                <span class="btn btn-default btn-sm bg-dark text-light bt-excluir" title="Remover Categoria" data-cd="{{$val['cdCategoria']}}">X</span>
+                                            </center>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

@@ -45,7 +45,7 @@ class Aplicacao{
 
 
         //define periodo em anos
-        $anos = $this->periodo->difDias($params['dtinicio'], $params['dtfinal']);
+        $anos = $this->periodo->difDatas([ $params['dtinicio'], $params['dtfinal'] ]);
         
         //define taxa ao dia
         $txProvento = (float) $params['taxa-ano'];
