@@ -108,13 +108,13 @@
                 @if( isset($receita) )
                     
                     <div class="row">
-                        <div class="col-sm-7">
-                            <h5 class="text text-secondary">Receita Mensal</h5>
-                        </div>
                         <div class="col-sm-5">
+                            <h5 class="text text-secondary">Receitas</h5>
+                        </div>
+                        <div class="col-sm-7">
                             <form action="/gerar-contas" method="post">
                                 <input type="hidden" name="_token" value="{!!csrf_token()!!}">
-                                <button class="btn btn-default btn-sm bg-dark text-light">Gerar Contas</button>  
+                                <button class="btn btn-default btn-sm bg-dark text-light">Gerar/Atualizar Contas</button>
                             </form>
                         </div>
                     </div>    

@@ -4,7 +4,8 @@
  * Em desenvolvimento
  * @author: Fernando Bino Machado
  * 
- */
+*/
+
 namespace App\Http\Repositories;
 
 use DateTime;
@@ -95,12 +96,12 @@ class Periodo{
     }
 
     /**
-    * @description: retorna diferenca entre duas datas
-    * @author: Fernando Bino Machado
-    * @param: array $arrDatas[0,1] - cada posição do array deve conter uma data
-    * @param: $formatoDif - o formato de retorno desejado, quando omitido assume o formato em anos 'Y'
-    * @return: int $diferenca, retorna a diferenca entre as datas com base no formato especificado na variável $formatoDif
-    * @example: difDatas( ['2019-01-01','2019-07-25'], 'D' );
+     * @description: retorna diferenca entre duas datas
+     * @author: Fernando Bino Machado
+     * @param: array $arrDatas[0,1] - cada posição do array deve conter uma data
+     * @param: $formatoDif - o formato de retorno desejado, quando omitido assume o formato em anos 'Y'
+     * @return: int $diferenca, retorna a diferenca entre as datas com base no formato especificado na variável $formatoDif
+     * @example: difDatas( ['2019-01-01','2019-07-25'], 'D' );
     */
 
     public function difDatas($arrDatas=null, $formatoDif='Y'){
@@ -160,13 +161,14 @@ class Periodo{
                     'final'=>$data1->format('Y-m-d H:i:s')
                 ];
             }
-
+            
             //sobreescreve a segunda data caso o formato de horas esteja zerado
             if( $data2->format('H:i:s') == "00:00:00" ){
-                $periodo['final'] = $data2->format('Y-m-d')." 23:59:59";
+                $dtFinal = new DateTime($periodo['final']);
+                $periodo['final'] = $dtFinal->format('Y-m-d')." 23:59:59";
             }
         }
-
+        
         //retorna $periodo
         return $periodo;
 

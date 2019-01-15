@@ -180,6 +180,7 @@ class Conta{
     */
 
     public function gerarContas(){
+        
         //instancia data atual
         $objDataAtual = new DateTime();
 
@@ -200,56 +201,60 @@ class Conta{
                         ->orderBy('dia')
                         ->get();
         
+        //inicia contadores para retornar mensagem
         $novasContas = 0;
-
+        $contasAtualizadas = 0;
+        
         //verifica em cada orçamento se é permitido o cadastro
         foreach( $orcamentos as $num => $val ){
             
             //busca a ultima conta cadastrada relacionada ao orçamento atual
             $contas = DB::table('conta')->select()->where('cdOrcamento',$val->cdOrcamento)->orderBy('dtVencimento','desc')->limit('1')->get();
             
+            //inicia preparação dos dados para salvar ou alterar
+            $diaOrcamento = $val->dia;
+
+            if( (int) $val->dia < 10 ){
+                $diaOrcamento = "0{$val->dia}";
+            }
+
+            $dataConta = "{$anoAtual}-{$mesAtual}-{$diaOrcamento} 00:00:00";
+            
+            $valores['tabela'] = 'conta';
+            $valores['valores']['cdOrcamento'] = $val->cdOrcamento;
+            $valores['valores']['dsConta'] = $val->nmOrcamento;
+            $valores['valores']['vlConta'] = $val->vlOrcamento;
+            $valores['valores']['dtVencimento'] = $dataConta;
+            $valores['valores']['tpConta'] = $val->tpOrcamento;
+            
             //se existirem contas relacionadas valida se pode cadastrar
             if( count($contas) ){
-                
-                $diaOrcamento = $val->dia;
-
-                if( (int) $val->dia < 10 ){
-                    $diaOrcamento = "0{$val->dia}";
-                }
-
-                $dataConta = "{$anoAtual}-{$mesAtual}-{$diaOrcamento} 00:00:00";
-                
+            
+                //cadastra nova conta
                 if($dataConta != $contas[0]->dtVencimento){
-                    
-                    $valores['tabela'] = 'conta';
-                    $valores['valores']['cdOrcamento'] = $val->cdOrcamento;
-                    $valores['valores']['dsConta'] = $val->nmOrcamento;
-                    $valores['valores']['vlConta'] = $val->vlOrcamento;
-                    $valores['valores']['dtVencimento'] = $dataConta;
-                    $valores['valores']['tpConta'] = $val->tpOrcamento;
                     
                     $novaConta = $this->pesquisa->salvar($valores);
 
                     if($novaConta > 0){
                         $novasContas += 1;
                     }
+                
+                //alterar conta existente
+                }else{
+                    //adiciona dados para alterar a conta já existente
+                    $valores['campo']='cdConta';
+                    $valores['valor']=$contas[0]->cdConta;
+
+                    $acaoAtualizar = $this->pesquisa->alterarCamposPorValor($valores);
+
+                    if($acaoAtualizar > 0){
+                        $contasAtualizadas += 1;
+                    }
                 }
 
 
             //cadastra pela primeira vez se não existir nenhuma ocorrencia
             }else{
-                $diaOrcamento = $val->dia;
-
-                if( (int) $val->dia < 10 ){
-                    $diaOrcamento = "0{$val->dia}";
-                }
-
-                $valores['tabela'] = 'conta';
-                $valores['valores']['cdOrcamento'] = $val->cdOrcamento;
-                $valores['valores']['dsConta'] = $val->nmOrcamento;
-                $valores['valores']['vlConta'] = $val->vlOrcamento;
-                $valores['valores']['dtVencimento'] = "{$anoAtual}-{$mesAtual}-{$diaOrcamento} 00:00:00";
-                $valores['valores']['tpConta'] = $val->tpOrcamento;
                 
                 $novaConta = $this->pesquisa->salvar($valores);
 
@@ -259,7 +264,7 @@ class Conta{
             }
         }
         
-        session(['message'=>'Processo de Geração de Contas Concluído: '.$novasContas.' conta(s) gerada(s) !!']);
+        session(['message'=>'Processo de Geração de Contas Concluído: '.$novasContas.' conta(s) gerada(s) e '.$contasAtualizadas.' atualizada(s) !!']);
         session(['tipoMessage'=>'1']);
 
         return true;

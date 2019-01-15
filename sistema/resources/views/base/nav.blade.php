@@ -1,7 +1,7 @@
 <!-- Menu superior -->
 <nav class="navbar navbar-default bg-dark nav-header">
     <div class="col-sm-3 col-xs-12">
-        <h5 class="text text-light">SoftBino - Informática</h5>
+        <h5 class="text text-light">Controle de Contas - Laravel</h5>
     </div>
 
     <div class="col-sm-8 col-xs-12">

@@ -91,7 +91,8 @@ $(function(){
 /**
 * @description: aplica configuraçõe iniciais
 * 1 configura os links de paginação com parametros do filtro
-* 2 move o foco no campo tipo do form de lançamentos
+* 2 mantem os parametros do filtro caso existam
+* 3 move o foco no campo tipo do form de lançamentos
 * @author: Fernando Bino Machado
 */
 
@@ -152,9 +153,17 @@ function configsInicio(){
                     $(this).attr('href', novaUrl)
                 }
             })
+        
+
+        // 2 mantem os parametros do filtro caso existam
+            $('#dtinicio').val(configFunc.parametros.dtinicio)
+            $('#dtfinal').val(configFunc.parametros.dtfinal)
+            $('#filtro-descricao').val(configFunc.parametros.descricao)
+            $('#filtro-tipo').val(configFunc.parametros.tipo).trigger('change')
+
         }
-    
-    //2 move o foco no campo tipo do form de lançamentos
+        
+    //3 move o foco no campo tipo do form de lançamentos
         $('#tipo').focus()
 
     }catch(e){}
