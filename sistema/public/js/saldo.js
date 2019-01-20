@@ -1,28 +1,20 @@
 
 $(function(){
+    
     /**
-     * @description: faz a paginação dos lançamentos
+     * @description: faz a automática dos lançamentos
      * @author: Fernando Bino Machado
     */
 
-    $('#verMais').click(function(){
-        //monta os dados
-        var page = parseInt($('#pageAtual').val()) + 1
-
-        var dados = {
-            _token: $('#tkn').val(),
-            dias: $('#dias').val(),
-            page: page
-        }
-        
-        //faz a paginação
-        if( parseInt(dados.page) <= parseInt( $('#totalPage').val() ) ){
-            send_ajax('/paginar-lancamentos','post',dados,respostaPaginacaoLancamentos)
-        }else{
-            message('Todos os registros da pesquisa já foram exibidos...')
+    $('#verMais').on('inview', function(event, isInView) {
+        if(isInView){
+            $('#loader').show()
+            setTimeout(function(){
+                paginarLancamentos()
+            },1500)
         }
     })
-    // gerarGraficoPadrao(strTipo, strTitulo, arrLabels, arrDatasets, idCanvas)
+
     configsInicio()
 })
 
@@ -102,7 +94,30 @@ function respostaPaginacaoLancamentos(resp){
     $('#pageAtual').val(resp.page)
     $('#lancamentos').append(resp.html)
 
-    if( parseInt(resp.page) == parseInt( $('#totalPage').val() ) ){
-        $('#verMais').hide()
-    }
+    $('#loader').hide()
+}
+
+/**
+ * @description: monta os dados para paginação
+ * @author: Fernando Bino Machado
+*/
+
+function paginarLancamentos(){
+    try{
+        //monta os dados
+        var page = parseInt($('#pageAtual').val()) + 1
+
+        var dados = {
+            _token: $('#tkn').val(),
+            dias: $('#dias').val(),
+            page: page
+        }
+
+        //faz a paginação
+        if( parseInt(dados.page) <= parseInt( $('#totalPage').val() ) ){
+            send_ajax('/paginar-lancamentos','post',dados,respostaPaginacaoLancamentos)
+        }else{
+            $('#loader').hide()
+        }
+    }catch(e){}
 }

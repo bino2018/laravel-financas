@@ -61,8 +61,13 @@
                         
                         <input type="hidden" id="totalPage" value="{{$totalPage}}">
                         <input type="hidden" id="pageAtual" value="{{$pageAtual}}">
-
-                        <center><span id="verMais" class="btn btn-secondary btn-sm">Visualizar Mais <i class='fas fa-plus'></i></span></center>
+                        <div class="row" id="verMais"></div>
+                        
+                        <div id="loader" class="row" style="display: none;">
+                            <div class="col-sm-12">
+                                <center><i class="fas fa-spinner fa-spin"></i></center>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-7">
                         
@@ -93,6 +98,7 @@
 
 @include('modal.contas')
 
+<script src="{{asset('js/inview.js')}}"></script>
 <script src="{{asset('js/Chart.js')}}"></script>
 <script src="{{asset('js/saldo.js')}}"></script>
 
