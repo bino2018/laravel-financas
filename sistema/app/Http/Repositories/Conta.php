@@ -100,75 +100,84 @@ class Conta{
 
         //agrega os valores
         $arrMeses=[];
-
+        $contasValidadas=[];
         //faz validações
         foreach( $result as $num => $val ){
-            
-            //verifica qual mes corresponde o registro atual
-            $formatoMes = date('m', strtotime($val->dtVencimento));
-            $numMes = $formatoMes;
-            
-            //retira o zero da frente se o numMes for menor que 10
-            if( (int) $numMes < 10){
-                $numMes = substr($numMes, 1,1);
-            }
-            
-            //define o mes
-            $mes = $meses[$numMes];
+            if( !in_array($val->cdConta, $contasValidadas) ){
+                //verifica qual mes corresponde o registro atual
+                $formatoMes = date('m', strtotime($val->dtVencimento));
+                $numMes = $formatoMes;
+                
+                //retira o zero da frente se o numMes for menor que 10
+                if( (int) $numMes < 10){
+                    $numMes = substr($numMes, 1,1);
+                }
+                
+                //define o mes
+                $mes = $meses[$numMes];
 
-            $detalhesConta = (array) $val;
+                $detalhesConta = (array) $val;
 
-            //verifica se existe valor lançado para a conta atual
-            if( isset($detalhesConta['vlLancamento']) && !empty($detalhesConta['vlLancamento']) ){
-                //define contador
-                if( isset($arrMeses[$mes]['ok'])){
-                    $arrMeses[$mes]['ok'] += 1;
+                //soma os lançamentos ligados a essa conta
+                $somaContaLancamento = DB::table('lancamento')
+                        ->select('vlLancamento')
+                        ->where('cdConta','=',$val->cdConta)
+                        ->sum('vlLancamento');
+
+                //verifica se existe valor lançado para a conta atual
+                if( isset($detalhesConta['vlLancamento']) && !empty($detalhesConta['vlLancamento']) ){
+
+                    //define contador
+                    if( isset($arrMeses[$mes]['ok'])){
+                        $arrMeses[$mes]['ok'] += 1;
+                    }else{
+                        $arrMeses[$mes]['ok'] = 1;
+                    }
+
+                    //define status de recebido
+                    $recebidoEm = 'Recebido em: '.date('d-m-Y', strtotime($detalhesConta['dtLancamento']));
+                    
+                    //define status de pago
+                    $pagoEm = 'Pago em: '.date('d-m-Y', strtotime($detalhesConta['dtLancamento']));
+                    
+                    //verifica tipo de conta e aplica status
+                    $statusConta = ($detalhesConta['tpConta'] == '1') ? $recebidoEm : $pagoEm;
+                    
                 }else{
-                    $arrMeses[$mes]['ok'] = 1;
+                    //define contador
+                    if( isset($arrMeses[$mes]['pendente'])){
+                        $arrMeses[$mes]['pendente'] += 1;
+                    }else{
+                        $arrMeses[$mes]['pendente'] = 1;
+                    }
+
+                    //verifica tipo de conta e aplica status
+                    $statusConta = ($detalhesConta['tpConta'] == '1') ? 'A Receber' : 'A Pagar';
                 }
 
-                //define status de recebido
-                $recebidoEm = 'Recebido em: '.date('d-m-Y', strtotime($detalhesConta['dtLancamento']));
-                
-                //define status de pago
-                $pagoEm = 'Pago em: '.date('d-m-Y', strtotime($detalhesConta['dtLancamento']));
-                
-                //verifica tipo de conta e aplica status
-                $statusConta = ($detalhesConta['tpConta'] == '1') ? $recebidoEm : $pagoEm;
-                
-            }else{
-                //define contador
-                if( isset($arrMeses[$mes]['pendente'])){
-                    $arrMeses[$mes]['pendente'] += 1;
+                //define informações para montar tabela no frontend
+                $detalhesConta['valor'] = number_format($detalhesConta['vlConta'], 2, '.', '');
+                $detalhesConta['valorLancado'] = number_format($somaContaLancamento,2,'.','');
+                $detalhesConta['vencimento'] = date('d-m-Y', strtotime($detalhesConta['dtVencimento']));
+                $detalhesConta['situacao'] = $statusConta;
+
+                //define contador total
+                if( isset($arrMeses[$mes]['total'])){
+                    $arrMeses[$mes]['total'] += 1;
                 }else{
-                    $arrMeses[$mes]['pendente'] = 1;
+                    $arrMeses[$mes]['total'] = 1;
                 }
 
-                //verifica tipo de conta e aplica status
-                $statusConta = ($detalhesConta['tpConta'] == '1') ? 'A Receber' : 'A Pagar';
+                //define ano conforme data de vencimento
+                $arrMeses[$mes]['ano'] = date('Y', strtotime($detalhesConta['dtVencimento']));
+
+
+                $arrMeses[$mes][] = $detalhesConta;
+                $contasValidadas[] = $val->cdConta;
             }
-
-            //define informações para montar tabela no frontend
-            $detalhesConta['valor'] = number_format($detalhesConta['vlConta'], 2, '.', '');
-            $detalhesConta['vencimento'] = date('d-m-Y', strtotime($detalhesConta['dtVencimento']));
-            $detalhesConta['situacao'] = $statusConta;
-
-            //define contador total
-            if( isset($arrMeses[$mes]['total'])){
-                $arrMeses[$mes]['total'] += 1;
-            }else{
-                $arrMeses[$mes]['total'] = 1;
-            }
-
-            //define ano conforme data de vencimento
-            $arrMeses[$mes]['ano'] = date('Y', strtotime($detalhesConta['dtVencimento']));
-
-
-            $arrMeses[$mes][] = $detalhesConta;
 
         }
 
-        
         return $arrMeses;
     }
 

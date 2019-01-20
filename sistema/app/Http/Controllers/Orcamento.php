@@ -53,7 +53,8 @@ class Orcamento{
                                 'o.dia',
                                 'o.validade',
                                 'o.tpOrcamento',
-                                'o.cdStatus'
+                                'o.cdStatus',
+                                'o.cdOcorrencia'
                             )
                             ->join('categoria as c','c.cdCategoria','=','o.cdCategoria')
                             ->where('o.validade','>',$validade)
@@ -62,7 +63,7 @@ class Orcamento{
                             ->orderBy('o.dia')
                             ->paginate(4);
         
-        //pega lista de orçamentos entradas
+        //pega lista de orçamentos saidas
         $data['orcamentosSaidas'] = DB::table('orcamento as o')
                             ->select(
                                 'o.cdOrcamento',
@@ -73,7 +74,8 @@ class Orcamento{
                                 'o.dia',
                                 'o.validade',
                                 'o.tpOrcamento',
-                                'o.cdStatus'
+                                'o.cdStatus',
+                                'o.cdOcorrencia'
                             )
                             ->join('categoria as c','c.cdCategoria','=','o.cdCategoria')
                             ->where('o.validade','>',$validade)
@@ -132,6 +134,7 @@ class Orcamento{
             $valores['valores']['validade'] = $validade;
             $valores['valores']['tpOrcamento'] = $params['tipo'];
             $valores['valores']['cdStatus'] = "1";
+            $valores['valores']['cdOcorrencia'] = $params['ocorrencia'];
 
             //salva orcamento
             $acao = $this->pesquisa->salvar($valores);
@@ -157,6 +160,7 @@ class Orcamento{
             $valores['valores']['nmOrcamento'] = $params['descricao'];
             $valores['valores']['vlOrcamento'] = $params['valor'];
             $valores['valores']['dia'] = $params['dia'];
+            $valores['valores']['cdOcorrencia'] = $params['ocorrencia'];
             $valores['valores']['validade'] = $validade;
             $valores['campo']='cdOrcamento';
             $valores['valor']=$params['codigo'];

@@ -83,6 +83,9 @@
     //Pesquisa Periodo saldo em dias
     Route::post('/saldo', 'Saldo@index')->middleware(['validar']);
 
+    //Panição dos lançamentos
+    Route::post('/paginar-lancamentos','Saldo@paginarLancamentos')->middleware(['validar']);
+
 //APLICAÇÕES
     //View aplicações
     Route::get('/aplicacao', 'Aplicacao@index')->middleware(['validar']);

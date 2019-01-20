@@ -17,7 +17,7 @@
                             <label class="label-form" for="valor">Informe o Período de Últimos Dias: </label>
                         </div>
                         <div class="col-sm-5">
-                            <input type="number" id="dias" name="dias" min="1" max="365" class="form-control form-control-sm" placeholder="ultimos dias" required>
+                            <input type="number" id="dias" name="dias" min="1" max="365" class="form-control form-control-sm" value="{{$dias}}" placeholder="ultimos dias" required>
                         </div>
                         <div class="col-sm-2">    
                             <button class="btn btn-success btn-sm text-light">Consultar</button>      
@@ -34,48 +34,58 @@
             <div class="col-sm-12 panel-table">
                 <div class="row">
                     <div class="col-sm-5">
-                        <h5 class="text text-secondary">Transações</h5>
+                        <h5 class="text text-secondary">Transações <span class="badge badge-primary badge-sm">{{count($extrato['extrato'])}}</span></h5>
                     </div>
                     <div class="col-sm-7">
-                        <table class="table table-sm table-bordered">
-                            <tr>
-                                <td>Recebidos: {{$detalhes['recebido']}}</td>
-                                <td>Gastos: {{$detalhes['gasto']}}</td>
-                                <td>Saldo: {{$detalhes['saldo']}}</td>
-                            </tr>
-                        </table>
+                        <h5 class="text text-secondary">Saldo</h5>
                     </div>
                 </div>
-                
 
-                <table class="table table-sm table-bordered">
-                    <thead>
-                        <tr>
-                            <td>Data</td>
-                            <td>Valor</td>
-                            <td>Descrição</td>
-                            <td>Operação</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if( isset($extrato) && count($extrato) )
-                            @foreach( $extrato as $num => $val )
+                <div class="row">
+                    <div class="col-sm-5" id="containerLancamentos">
+                        <table class="table table-sm table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>{{ date('d-m-Y', strtotime($val['dtLancamento'])) }}</td>
-                                    <td>{{ number_format($val['vlLancamento'],2,'.','') }}</td>
-                                    <td>{{ $val['nmLancamento'] }}</td>
-                                    <td>
-                                        @if( $val['tpLancamento'] == '1' )
-                                            <span class="text text-success"><i>Recebimento</i></span>
-                                        @else
-                                            <span class="text text-danger"><i>Pagamento</i></span>
-                                        @endif
-                                    </td>
+                                    <td>Data</td>
+                                    <td>Valor</td>
+                                    <td>Descrição</td>
+                                    <td>Operação</td>
                                 </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                            </thead>
+                            <tbody id="lancamentos">
+                                @if( isset( $lancamentos ) && count($lancamentos) )
+                                    @include('saldo.lancamentos')
+                                @endif
+                            </tbody>
+                        </table>
+                        
+                        <input type="hidden" id="totalPage" value="{{$totalPage}}">
+                        <input type="hidden" id="pageAtual" value="{{$pageAtual}}">
+
+                        <center><span id="verMais" class="btn btn-secondary btn-sm">Visualizar Mais <i class='fas fa-plus'></i></span></center>
+                    </div>
+                    <div class="col-sm-7">
+                        
+                        <table class="table table-sm table-bordered">
+                            <input type="hidden" id="recebido" value="{{$extrato['detalhes']['recebido']}}">
+                            <input type="hidden" id="gasto" value="{{$extrato['detalhes']['gasto']}}">
+                            <input type="hidden" id="saldo" value="{{$extrato['detalhes']['saldo']}}">
+
+                            <tr>
+                                <td>Recebidos: {{$extrato['detalhes']['recebido']}}</td>
+                                <td>Gastos: {{$extrato['detalhes']['gasto']}}</td>
+                                <td>Saldo: {{$extrato['detalhes']['saldo']}}</td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <canvas id="graf"></canvas>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -83,6 +93,7 @@
 
 @include('modal.contas')
 
+<script src="{{asset('js/Chart.js')}}"></script>
 <script src="{{asset('js/saldo.js')}}"></script>
 
 @stop

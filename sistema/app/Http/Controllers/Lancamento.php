@@ -42,6 +42,9 @@ class Lancamento{
 
         //busca ultimos lançamentos
         $data['lancamentos'] = $this->lancamento->listarLancamentos(['periodo'=>'150', 'data'=>$params]);
+
+        //define o valor de soma para coluna vlLancamento
+        $data['soma'] = $this->lancamento->somarValores(['periodo'=>'150', 'data'=>$params]);
         
         //verifica se existem lançamentos e exibe mensagem se necessário
         if( !count($data['lancamentos']) ){
@@ -76,6 +79,28 @@ class Lancamento{
             return back();
         }
 
+        //busca dados auxiliares ligados a conta
+
+        //busca valor orçamento
+        $valorOrcamento = DB::table('conta')
+        ->select('vlConta')
+        ->where('cdConta','=',$params['conta'])
+        ->sum('vlConta');
+
+        //busca valor total lançado para essa conta
+        $totalLancado = DB::table('lancamento')
+                ->select('vlLancamento')
+                ->where('cdConta','=',$params['conta'])
+                ->sum('vlLancamento');
+
+        //verifica se o tipo de ocorrencia da conta é único, caso sim retorna erro
+        if( $params['conta'] != '0' && $this->lancamento->tipoOcorrencia($params['conta']) == "1" && (float) $totalLancado > 0 ){
+            session(['message'=>'Conta não pode ser lançada novamente!!']);
+            session(['tipoMessage'=>'2']);
+
+            return back();
+        }
+
         //verifica se o tipo de lançamento é uma saída e se o saldo é suficiente
         if( $params['tipo'] == 2){
             //busca o extrato omitindo parametos para poder pegar o saldo atual geral
@@ -102,6 +127,19 @@ class Lancamento{
         $valores['valores']['vlLancamento'] = $params['valor'];
         $valores['valores']['dtLancamento'] = date('Y-m-d H:i:s', time());
         $valores['valores']['tpLancamento'] = $params['tipo'];
+        $valores['valores']['cdPlanejado'] = '1';
+        
+        //verifica limites do orçamento
+        if( $params['conta'] != '0' ){
+            //verifica se o valor de orcamento foi ultrapassado, caso sim seta $valores['valores']['cdPlanejado'] como 2 de não planejado
+            if( (float) $valorOrcamento >= ( (float) $totalLancado ) + (float) $params['valor'] ){
+                $valores['valores']['cdPlanejado'] = '1';
+            }else{
+                $valores['valores']['cdPlanejado'] = '2';
+            }
+        }else{
+            $valores['valores']['cdPlanejado'] = '2';
+        }
 
         //salva o lançamento
         $acao = $this->pesquisa->salvar($valores);

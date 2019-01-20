@@ -145,7 +145,7 @@ tr.dados-info td{
     padding: 10px;
     border-radius: 5px;
     display: block;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
 }
 #close-modal{
     margin-top: -5px;
@@ -157,4 +157,10 @@ tr.dados-info td{
     color: #f1f1f1;
     height: 120px;
     padding:5px;
+}
+
+/*Div que contem os lançamentos na view index saldo*/
+#containerLancamentos{
+    max-height: 400px;
+    overflow-y: scroll;
 }

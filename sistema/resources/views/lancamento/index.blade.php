@@ -160,13 +160,16 @@
             <div class="col-sm-12 panel-table">
 
                 <div class="row">
-                    <div class="col-sm-9">
+                    <div class="col-sm-8">
                         <h5 class="text text-secondary">Ultimos Lançamentos</h5>
                     </div>
-                    <div class="col-sm-3">
-                        @if( isset($lancamentos) && count($lancamentos) )
-                            {!! $lancamentos->links() !!}
-                        @endif
+                    <div class="col-sm-4">
+                        <table class="table table-sm table-bordered">
+                            <tr>
+                                <td>Cálculo Soma:</td>
+                                <td>R$ {{$soma}}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
 
@@ -205,9 +208,7 @@
                     </tbody>
                 </table>
                 <div class="row">
-                    <div class="col-sm-9">
-                    </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-12">
                         {!! $lancamentos->links() !!}
                     </div>
                 </div>

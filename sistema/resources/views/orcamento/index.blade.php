@@ -13,111 +13,139 @@
                 <h5 class="text text-secondary">Cadastro</h5>
                 <div class="card card-cadastro">
                     <form action="/salvar-orcamento" method="post">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <h5 class="text text-secondary">Dados</h5>
+                            </div>
+                            <div class="col-sm-2">
+                                <button class="btn btn-success btn-sm text-light">Salvar Item</button>  
+                            </div>
+                        </div><hr>
+
                         <input type="hidden" id="tkn" name="_token" value="{!!csrf_token()!!}">
                         <input type="hidden" id="codigo" name="codigo" value="0">
 
                         <div class="row">
-                            <div class="col-sm-3">
-                                <label class="label-form" for="categoria">Categoria (*)</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label class="label-form" for="categoria">Categoria (*)</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <select name="categoria" id="categoria" class="form-control form-control-sm" required>
+                                            <option value="">Selecione</option>
+                                            @if( isset($categorias) && count($categorias) )
+                                                @foreach( $categorias as $num => $val )
+                                                    <option value="{{$val->cdCategoria}}">{{$val->nmCategoria}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>    
+                                    </div>
+                                </div>            
                             </div>
-                            <div class="col-sm-7">
-                                <select name="categoria" id="categoria" class="form-control form-control-sm" required>
-                                    <option value="">Selecione</option>
-                                    @if( isset($categorias) && count($categorias) )
-                                        @foreach( $categorias as $num => $val )
-                                            <option value="{{$val->cdCategoria}}">{{$val->nmCategoria}}</option>
-                                        @endforeach
-                                    @endif
-                                </select>    
-                            </div>
-                            <div class="col-sm-2">        
-                            </div>
-                        </div>            
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <label class="label-form" for="descricao">Descrição (*)</label>
-                            </div>
-                            <div class="col-sm-7">
-                                <input type="text" id="descricao" name="descricao" class="form-control form-control-sm" maxlength="30" placeholder="Descrição do Orçamento" required>
-                            </div>
-                            <div class="col-sm-2">        
-                            </div>
-                        </div>    
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <label class="label-form" for="valor">Valor (*)</label>
-                            </div>
-                            <div class="col-sm-7">
-                                <input type="number" id="valor" name="valor" step="0.01" class="form-control form-control-sm" placeholder="Valor Aproximando" required>
-                            </div>
-                            <div class="col-sm-2">        
-                            </div>
-                        </div>    
-
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <label class="label-form" for="dia">Dia Referencia (*)</label>
-                            </div>
-                            <div class="col-sm-7">
-                                <select name="dia" id="dia" class="form-control form-control-sm" required>
-                                    <option value="">Selecione</option>
-                                    @if( isset($dias) && count($dias) )
-                                        @foreach( $dias as $dia => $val )
-                                            <option value="{{$val}}">{{$val}}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </div>
-                            <div class="col-sm-2">      
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label class="label-form" for="descricao">Descrição (*)</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="text" id="descricao" name="descricao" class="form-control form-control-sm" maxlength="30" placeholder="Descrição do Orçamento" required>
+                                    </div>
+                                </div>    
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-3">
-                                <label class="label-form" for="dia">Data de Validade</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label class="label-form" for="valor">Valor (*)</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="number" id="valor" name="valor" step="0.01" class="form-control form-control-sm" placeholder="Valor Aproximando" required>
+                                    </div>
+                                </div>    
                             </div>
-                            <div class="col-sm-7">
-                                <input type="date" name="validade" id="validade" class="form-control form-control-sm">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label class="label-form" for="dia">Dia Ref. (*)</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <select name="dia" id="dia" class="form-control form-control-sm" required>
+                                            <option value="">Selecione</option>
+                                            @if( isset($dias) && count($dias) )
+                                                @foreach( $dias as $dia => $val )
+                                                    <option value="{{$val}}">{{$val}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-sm-2">      
-                            </div>
-                        </div> 
+                        </div>
 
                         <div class="row">
-                            <div class="col-sm-3">
-                                <label class="label-form" for="dia">Tipo (*)</label>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label class="label-form" for="dia">Validade</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="date" name="validade" id="validade" class="form-control form-control-sm">
+                                    </div>
+                                </div> 
                             </div>
-                            <div class="col-sm-7">
-                                <select name="tipo" id="tipo" class="form-control form-control-sm" required>
-                                    <option value="">Selecione</option>
-                                    <option value="1">Entradas</option>
-                                    <option value="2">Saidas</option>
-                                </select>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label class="label-form" for="dia">Tipo (*)</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <select name="tipo" id="tipo" class="form-control form-control-sm" required>
+                                            <option value="">Selecione</option>
+                                            <option value="1">Entradas</option>
+                                            <option value="2">Saidas</option>
+                                        </select>
+                                    </div>
+                                </div>    
                             </div>
-                            <div class="col-sm-2">      
-                                <button class="btn btn-success btn-sm text-light">Salvar</button>  
+                        </div>
+                
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label class="label-form" for="ocorrencia">Ocorrência (*)</label>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <select name="ocorrencia" id="ocorrencia" class="form-control form-control-sm" required>
+                                            <option value="">Selecione</option>
+                                            <option value="1">Apenas um lançamento no período</option>
+                                            <option value="2">Varios lançamentos no período</option>
+                                        </select>
+                                    </div>
+                                </div>    
                             </div>
-                        </div>    
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-5">        
+                                    </div>
+                                    <div class="col-sm-7">      
+                                        
+                                    </div>
+                                </div>    
+                            </div>
+                        </div>
+
+                          
                     </form>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 @if( isset($receita) )
-                    
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <h5 class="text text-secondary">Receitas</h5>
-                        </div>
-                        <div class="col-sm-7">
-                            <form action="/gerar-contas" method="post">
-                                <input type="hidden" name="_token" value="{!!csrf_token()!!}">
-                                <button class="btn btn-default btn-sm bg-dark text-light">Gerar/Atualizar Contas</button>
-                            </form>
-                        </div>
-                    </div>    
+                    <h5 class="text text-secondary">Receitas</h5>    
 
                     <div class="card card-cadastro">
                         <table class="table table-bordered table-sm">
@@ -135,8 +163,16 @@
                             </tr>
                         </table>
                     </div>
+
+                    <br>
+                    <form action="/gerar-contas" method="post">
+                        <input type="hidden" name="_token" value="{!!csrf_token()!!}">
+                        <button class="btn btn-default btn-sm bg-dark text-light form-control form-control-sm">Clique para Gerar/Atualizar Contas</button>
+                    </form>
+                    
                 @endif
             </div>
+
         </div>
         <hr>
         <div class="row">

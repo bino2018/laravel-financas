@@ -110,7 +110,7 @@
                                 <td>Saldo Geral: </td>
                                 <td>R$ {{$resumo['saldo']['detalhes']['saldo']}}</td>
                             </tr>
-                            <tr>
+                            {{--<tr>
                                 <td>Total A Receber: </td>
                                 <td>R$ {{$resumo['pendentes']['pendentes']['a_receber']}}</td>
                             </tr>
@@ -121,7 +121,7 @@
                             <tr>
                                 <td>Previsão de Saldo: </td>
                                 <td>R$ {{$valorPrevisao}}</td>
-                            </tr>
+                            </tr>--}}
                         </table>
                     </div>
                 </div>
@@ -172,7 +172,8 @@
                                     <thead>
                                         <tr>
                                             <td>Descrição</td>
-                                            <td>Valor</td>
+                                            <td>Valor Orçado</td>
+                                            <td>Valor Lançado</td>
                                             <td>Vencimento</td>
                                             <td>Status</td>
                                             <td> </td>
@@ -184,6 +185,7 @@
                                                 <tr>
                                                     <td>{{$valores['dsConta']}}</td>
                                                     <td>{{$valores['valor']}}</td>
+                                                    <td>{{$valores['valorLancado']}}</td>
                                                     <td>{{$valores['vencimento']}}</td>
                                                     <td>{{$valores['situacao']}}</td>
                                                     <td>
@@ -244,7 +246,8 @@
                                     <thead>
                                         <tr>
                                             <td>Descrição</td>
-                                            <td>Valor</td>
+                                            <td>Valor Orçado</td>
+                                            <td>Valor Lançado</td>
                                             <td>Vencimento</td>
                                             <td>Status</td>
                                             <td> </td>
@@ -256,6 +259,7 @@
                                                 <tr>
                                                     <td>{{$valores['dsConta']}}</td>
                                                     <td>{{$valores['valor']}}</td>
+                                                    <td>{{$valores['valorLancado']}}</td>
                                                     <td>{{$valores['vencimento']}}</td>
                                                     <td>{{$valores['situacao']}}</td>
                                                     <td>

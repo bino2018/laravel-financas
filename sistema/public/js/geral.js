@@ -265,7 +265,7 @@ function gerarGraficoPadrao(strTipo, strTitulo, arrLabels, arrDatasets, idCanvas
                 title:{
                     display: true,
                     fontSize: 20,
-                    text: "Parcial Rol de Membros"
+                    text: strTitulo
                 },
                 legend:{
                     position: "right"

@@ -31,6 +31,7 @@ $(function(){
         $('#valor').val(obj.dados.vlOrcamento)
         $('#dia').val(obj.dados.dia).trigger('change')
         $('#tipo').val(obj.dados.tpOrcamento).trigger('change')
+        $('#ocorrencia').val(obj.dados.cdOcorrencia).trigger('change')
 
         //validade necessita de verificação
         if( obj.dados.validade != '2050-12-31 23:59:59' ){

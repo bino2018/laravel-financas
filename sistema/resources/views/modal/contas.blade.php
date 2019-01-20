@@ -50,25 +50,23 @@
                                     <tbody>
                                         @foreach( $contasReceber[$mes] as $conta => $valores )
                                             @if( is_numeric($conta) )
-                                                @if( !isset($valores['vlLancamento']) || is_null($valores['vlLancamento']) )
-                                           
-                                                    @php
-                                                        $jsonObj = json_encode($valores);
-                                                    @endphp
+                                                
+                                                @php
+                                                    $jsonObj = json_encode($valores);
+                                                @endphp
 
-                                                    <tr>
-                                                        <td>{{$valores['dsConta']}}</td>
-                                                        <td>{{$valores['valor']}}</td>
-                                                        <td>{{$valores['vencimento']}}</td>
-                                                        <td>{{$valores['situacao']}}</td>
-                                                        <td>
-                                                            <center>
-                                                                <span class="btn btn-default btn-sm bg-dark text-light bt-seleciona" title="Selecionar Conta" data-cd="{{$valores['cdConta']}}" data-obj="{{$jsonObj}}">V</span>
-                                                            </center>
-                                                        </td>
-                                                    </tr>
-                                                    
-                                                @endif
+                                                <tr>
+                                                    <td>{{$valores['dsConta']}}</td>
+                                                    <td>{{$valores['valor']}}</td>
+                                                    <td>{{$valores['vencimento']}}</td>
+                                                    <td>{{$valores['situacao']}}</td>
+                                                    <td>
+                                                        <center>
+                                                            <span class="btn btn-default btn-sm bg-dark text-light bt-seleciona" title="Selecionar Conta" data-cd="{{$valores['cdConta']}}" data-obj="{{$jsonObj}}">V</span>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                                
                                             @endif
                                         @endforeach
                                     </tbody>
@@ -118,25 +116,23 @@
                                     <tbody>
                                         @foreach( $contasPagar[$mes] as $conta => $valores )
                                             @if( is_numeric($conta) )
-                                                @if( !isset($valores['vlLancamento']) || is_null($valores['vlLancamento']) )
-                                           
-                                                    @php
-                                                        $jsonObj = json_encode($valores);
-                                                    @endphp
+                                                
+                                                @php
+                                                    $jsonObj = json_encode($valores);
+                                                @endphp
 
-                                                    <tr>
-                                                        <td>{{$valores['dsConta']}}</td>
-                                                        <td>{{$valores['valor']}}</td>
-                                                        <td>{{$valores['vencimento']}}</td>
-                                                        <td>{{$valores['situacao']}}</td>
-                                                        <td>
-                                                            <center>
-                                                                <span class="btn btn-default btn-sm bg-dark text-light bt-seleciona" title="Selecionar Conta" data-cd="{{$valores['cdConta']}}" data-obj="{{$jsonObj}}">V</span>
-                                                            </center>
-                                                        </td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>{{$valores['dsConta']}}</td>
+                                                    <td>{{$valores['valor']}}</td>
+                                                    <td>{{$valores['vencimento']}}</td>
+                                                    <td>{{$valores['situacao']}}</td>
+                                                    <td>
+                                                        <center>
+                                                            <span class="btn btn-default btn-sm bg-dark text-light bt-seleciona" title="Selecionar Conta" data-cd="{{$valores['cdConta']}}" data-obj="{{$jsonObj}}">V</span>
+                                                        </center>
+                                                    </td>
+                                                </tr>
                                                     
-                                                @endif
                                             @endif
                                         @endforeach
                                     </tbody>

@@ -16,10 +16,10 @@ class Saldo{
     * @description: retorna lista para calcular extrato
     * @author: Fernando Bino Machado
     * @params: array $params
-    * @return: array $extrato
+    * @return: array $return
     */
 
-    public function dadosParaExtrato($params){
+    public function dadosParaExtrato($params=[], $paginate=false){
         //inicia query
         $extrato = DB::table('lancamento as l')
         ->select(
@@ -34,7 +34,7 @@ class Saldo{
         ->leftJoin('conta as c','c.cdConta','=','l.cdConta');
 
         //configura query com parametros
-        if( isset($params) && count($params) ){
+        if( isset($params['dias']) && !empty($params['dias']) && !is_null($params['dias']) ){
             //definir periodo
             $periodo = $this->periodo->montaPeriodo( ['qtdeUnidade'=>$params['dias'],'formato'=>'D']);
 
@@ -42,11 +42,20 @@ class Saldo{
             $extrato = $extrato->where('l.dtLancamento','>=',$periodo['inicial']);
             $extrato = $extrato->where('l.dtLancamento','<=',$periodo['final']);
         }
-
-        //finaliza query
-        $extrato = $extrato->get();
         
-        return $extrato;
+        //finaliza query
+        if( $paginate ){
+            //faz a paginação caso tenha $paginate sera true
+            if( isset($params['page']) ){
+                $return = $extrato->paginate(15,['*'],'page',$params['page']);
+            }else{
+                $return = $extrato->paginate(15);
+            }
+        }else{
+            $return = $extrato->get();
+        }
+        // dd($return);
+        return $return;
     }
 
 
