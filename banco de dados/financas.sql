@@ -28,6 +28,7 @@ create table orcamento(
     validade datetime not null,
     tpOrcamento enum('1','2') not null,
     cdStatus enum('1','2') not null,
+    cdOcorrencia enum('1','2') not null
 
     primary key(cdOrcamento)
 )default charset = 'utf8';
@@ -52,6 +53,7 @@ create table lancamento(
     numNota bigint,
     nmAnexo varchar(255),
     tpLancamento enum('1','2'),
+    cdPlanejado enum('1','2') not null
     
     primary key(cdLancamento)
 )default charset = 'utf8';
