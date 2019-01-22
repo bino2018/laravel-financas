@@ -7,11 +7,13 @@ $(function(){
     */
 
     $('#verMais').on('inview', function(event, isInView) {
-        if(isInView){
-            $('#loader').show()
-            setTimeout(function(){
-                paginarLancamentos()
-            },1500)
+        if( parseInt( $('#pageAtual').val() ) < parseInt( $('#totalPage').val() ) ){
+            if(isInView){
+                $('#loader').show()
+                setTimeout(function(){
+                    paginarLancamentos()
+                },2000)
+            }
         }
     })
 

@@ -43,22 +43,13 @@
 
                 <div class="row">
                     <div class="col-sm-5" id="containerLancamentos">
-                        <table class="table table-sm table-bordered">
-                            <thead>
-                                <tr>
-                                    <td>Data</td>
-                                    <td>Valor</td>
-                                    <td>Descrição</td>
-                                    <td>Operação</td>
-                                </tr>
-                            </thead>
-                            <tbody id="lancamentos">
-                                @if( isset( $lancamentos ) && count($lancamentos) )
-                                    @include('saldo.lancamentos')
-                                @endif
-                            </tbody>
-                        </table>
-                        
+                    
+                        <div id="lancamentos">
+                            @if( isset( $lancamentos ) && count($lancamentos) )
+                                @include('saldo.lancamentos')
+                            @endif
+                        </div>
+                    
                         <input type="hidden" id="totalPage" value="{{$totalPage}}">
                         <input type="hidden" id="pageAtual" value="{{$pageAtual}}">
                         <div class="row" id="verMais"></div>

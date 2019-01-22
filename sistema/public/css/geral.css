@@ -59,6 +59,11 @@
 .card-cadastro{
     padding: 10px;
 }
+.card-lancamentos{
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 /* Labels de formularios de cadastro */
 .label-form{

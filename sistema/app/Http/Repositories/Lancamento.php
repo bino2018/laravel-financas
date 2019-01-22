@@ -126,13 +126,20 @@ class Lancamento{
     */
 
     public function tipoOcorrencia($cdConta){
-        $dadosConta = DB::table('conta as c')
-                    ->select('o.cdOcorrencia')
-                    ->join('orcamento as o','c.cdOrcamento','=','o.cdOrcamento')
-                    ->where('c.cdConta','=',$cdConta)
-                    ->get();
-        
-        $tipoOcorrencia = $dadosConta[0]->cdOcorrencia;
+        if( $cdConta != '0' ){
+            $dadosConta = DB::table('conta as c')
+                        ->select('o.cdOcorrencia')
+                        ->join('orcamento as o','c.cdOrcamento','=','o.cdOrcamento')
+                        ->where('c.cdConta','=',$cdConta)
+                        ->get();
+            if( count($dadosConta) ){
+                $tipoOcorrencia = $dadosConta[0]->cdOcorrencia;
+            }else{
+                $tipoOcorrencia = '1';
+            }
+        }else{
+            $tipoOcorrencia = '1';
+        }
         
         return $tipoOcorrencia;
     }

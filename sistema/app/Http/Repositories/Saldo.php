@@ -45,11 +45,12 @@ class Saldo{
         
         //finaliza query
         if( $paginate ){
+            $extrato = $extrato->orderBy('l.dtLancamento','desc');
             //faz a paginação caso tenha $paginate sera true
             if( isset($params['page']) ){
-                $return = $extrato->paginate(15,['*'],'page',$params['page']);
+                $return = $extrato->paginate(10,['*'],'page',$params['page']);
             }else{
-                $return = $extrato->paginate(15);
+                $return = $extrato->paginate(10);
             }
         }else{
             $return = $extrato->get();
