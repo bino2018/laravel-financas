@@ -39,12 +39,18 @@ values('nomeusuario','senha','email@gmail.com','1','1');
   <br>
   Lembre-se que essa é a pasta do projeto que você clonou.
 </p>
+<h1>Configure o Apache</h1>
+ <p>
+  Utilizando um terminal Edite o arquivo rodando o comando: <hr>
+  sudo nano /etc/apache2/sites-enabled/000-default.conf
+  <hr>
+        Alias /finance /var/www/laravel-financas/sistema/public
+        <Directory /var/www/laravel-financas/sistema/public>
+                Options Indexes FollowSymLinks
+                AllowOverride All
+        </Directory>
 
-<h1>7 - Inicie a aplicação </h1>
-<p>Após concluir a instalação, ainda na mesma pasta rode o comando:<br> php artisan serve</p>
+</p>
 
 <h1>8 - Acesse a aplicação</h1>
-<p>Digite na url do broswer um dos seguintes endereços: 127.0.0.1:8000 ou localhost:8000</p>
-
-<h1>9 - Faça login</h1>
-<p>Clique em login e faça login conforme o usuário que cadastrou na tabela usuario</p>
+<p>Digite na url do broswer: http://localhost/finance/home/fazer-login</p>
