@@ -7,6 +7,7 @@ Descrição: Exemplo de Laravel - Sistema de Finanças Básico - Estudo de Caso
 <h1> 1 - Clone o Projeto:  </h1>
 <p> 
     Abra um terminal e rode
+    
     cd /var/www/
   
     depois rode:
