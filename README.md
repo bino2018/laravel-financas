@@ -39,16 +39,16 @@ values('nomeusuario','senha','email@gmail.com','1','1');
   <br>
   Lembre-se que essa é a pasta do projeto que você clonou.
 </p>
-<h1>Configure o Apache</h1>
+<h1>7 - Configure o Apache</h1>
  <p>
   Utilizando um terminal Edite o arquivo rodando o comando: <hr>
   sudo nano /etc/apache2/sites-enabled/000-default.conf
   <hr>
-        Alias /finance /var/www/laravel-financas/sistema/public
-        <Directory /var/www/laravel-financas/sistema/public>
-                Options Indexes FollowSymLinks
-                AllowOverride All
-        </Directory>
+        Alias /finance /var/www/laravel-financas/sistema/public<br>
+        <Directory /var/www/laravel-financas/sistema/public><br>
+                Options Indexes FollowSymLinks<br>
+                AllowOverride All<br>
+        </Directory><br>
 
 </p>
 
