@@ -45,7 +45,7 @@ values('nomeusuario','senha','email@gmail.com','1','1');
   sudo nano /etc/apache2/sites-enabled/000-default.conf
   <br>
   
-  Insira o conteúdo abaixo antes do fechamento da tag </VirtualHost>
+  Insira o conteúdo abaixo antes do fechamento da tag VirtualHost
   
   <br>
         
