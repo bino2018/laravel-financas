@@ -6,7 +6,7 @@
         <div class="col-sm-4 col-xs-1">
         </div>
         <div class="col-sm-4 col-xs-10">
-            <form class="form border" action="/valida-login" method="post">
+            <form class="form border" action="{!! route('home.valida-login') !!}" method="post">
                 <input type="hidden" name="_token" value="{!!csrf_token()!!}">
                 <div class="row">
                     <div class="col-sm-12 col-xs-12">

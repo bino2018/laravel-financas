@@ -22,7 +22,7 @@
                 <br>
 
                 <div class="card card-cadastro">
-                    <form action="/salvar-lancamento" method="post">
+                    <form action="{!! route('lancamento.salvar') !!}" method="post">
                         <input type="hidden" id="tkn" name="_token" value="{!!csrf_token()!!}">
                         <input type="hidden" id="codigo" name="codigo" value="0">
                         
@@ -91,7 +91,7 @@
                 <br>
 
                 <div class="card card-cadastro">
-                    <form action="/lancamentos" method="post">
+                    <form action="{!! route('lancamento.index') !!}" method="post">
                         <input type="hidden" id="tkn" name="_token" value="{!!csrf_token()!!}">
                         
                         <div class="row">
@@ -220,6 +220,8 @@
 
 @include('modal.contas')
 
-<script src="{{asset('js/lancamento.js')}}"></script>
+<input type="hidden" id="route-excluir" value="{!! route('lancamento.deletar') !!}">
+
+<script src="{{asset('finance/js/lancamento.js')}}"></script>
 
 @stop

@@ -52,6 +52,8 @@ $(function(){
     */
 
    $('.checks').click(function(){
+        let rota = $('#route-marcar').val()
+        
         //prepara parametros para requisição
         var obj = {
             _token: $('#tkn').val(),
@@ -61,7 +63,7 @@ $(function(){
         }
         
         //envia para requisição com callback
-        send_ajax('/marcar-orcamento', 'post', obj, respostaMarcaOrcamento)
+        send_ajax(rota, 'post', obj, respostaMarcaOrcamento)
 
     })
 
@@ -74,6 +76,8 @@ $(function(){
 
    $('.bt-excluir').click(function(){
         if(confirm("DESEJA EXCLUIR O ORÇAMENTO SELECIONADO??")){
+            let rota = $('#route-excluir').val()
+
             //prepara parametros para requisição
             obj = {
                 _token:$('#tkn').val(),
@@ -81,7 +85,7 @@ $(function(){
             }
 
             //envia para requisição ajax com callback
-            send_ajax('/deletar-orcamento','post', obj, respostaDeletaOrcamento)
+            send_ajax(rota,'post', obj, respostaDeletaOrcamento)
         }
     })
 
@@ -134,7 +138,7 @@ function respostaDeletaOrcamento(resp){
 
         if(jsonResp.status == "1"){
             message('Registro exluído com sucesso!!',1)
-            redireciona('/orcamentos')
+            redireciona('')
         }else{
             message('Não foi possível excluir o registro...')
         }
@@ -163,7 +167,7 @@ function respostaMarcaOrcamento(resp){
         if(jsonResp.status == "1"){
             //necessário fazer dessa forma para recalcular a receita
             setTimeout(()=>{
-                window.location.href = '/orcamentos';
+                window.location.href = '';
             },750)
             
         }

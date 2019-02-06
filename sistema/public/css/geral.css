@@ -169,3 +169,12 @@ tr.dados-info td{
     max-height: 400px;
     overflow-y: scroll;
 }
+
+/*Filtro relatório*/
+.menu-filtro{
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    margin-left: -10px;
+}

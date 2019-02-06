@@ -148,7 +148,7 @@ class Orcamento{
             }
 
             //redireciona apos ação
-            return redirect('/orcamentos');
+            return redirect( route('orcamento.index') );
             
         
         //altera orçamento caso já exista
@@ -177,7 +177,7 @@ class Orcamento{
             }
 
             //redireciona apos ação
-            return redirect('/orcamentos');
+            return redirect( route('orcamento.index') );
         }
     }
 

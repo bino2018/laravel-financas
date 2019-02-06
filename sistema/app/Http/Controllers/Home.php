@@ -75,19 +75,19 @@ class Home{
             if($criaPermissao){
                 session(['message'=>'']);
                 session(['tipoMessage'=>'1']);
-
-                return redirect('/sistema');
+                    
+                    return redirect( route('panel.ir-panel') );
             }else{
                 session(['message'=>'Login invalido!!']);
                 session(['tipoMessage'=>'2']);
 
-                return redirect('/login');
+                return redirect( route('home.ir-login') );
             }
         }else{
             session(['message'=>'Login invalido!!']);
             session(['tipoMessage'=>'2']);
 
-            return redirect('/login');
+            return redirect( route('home.ir-login') );
         }
 
     }

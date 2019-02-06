@@ -4,91 +4,116 @@
 //Porém recomenda-se criar as rotas em arquivos separados conforme a necessidade do projeto
 
 //HOME
-    
-    //inicio
-    Route::get('/', 'Home@home');
+    Route::group(['as'=>'home.', 'prefix'=>'finance/home'], function(){
+        //inicio
+        Route::get('login', ['as'=>'login','uses'=>'Home@home']);
+        //View Login
+        Route::get('fazer-login', ['as'=>'ir-login','uses'=>'Home@viewLogin']);
+        //Valida login
+        Route::post('valida-login',['as'=>'valida-login','uses'=>'Home@validaLogin']);
+    });
 
-    //View Login
-    Route::get('/login', 'Home@viewLogin');
-
-    //Valida login
-    Route::post('/valida-login','Home@validaLogin');
-
-    //retorna o sistema
-    Route::get('/sistema', 'Home@sistema')->middleware(['validar']);
+//SISTEMA
+    Route::group(['as'=>'panel.', 'prefix'=>'finance/panel'], function(){
+        //acessa o sistema
+        Route::get('menu', ['as'=>'ir-panel','uses'=>'Home@sistema'])->middleware(['validar']);
+    });
 
 //CATEGORIAS
-
-    //Cadastro de Categorias
-    Route::get('/categorias', 'Categoria@index')->middleware(['validar']);
-
-    //Salva Categorias
-    Route::post('/salvar-categoria', 'Categoria@salvar')->middleware(['validar']);
-
-    //Deleta Categorias
-    Route::post('/deletar-categoria','Categoria@deletar')->middleware(['validar']);
-
-    //Marca Status de Categoria
-    Route::post('/marcar-categoria', 'Categoria@marcar')->middleware(['validar']);
+    Route::group(['as'=>'cat.', 'prefix'=>'finance/categorias'], function(){
+        //acessa o sistema
+        Route::get('index', ['as'=>'index','uses'=>'Categoria@index'])->middleware(['validar']);
+        //Salva Categorias
+        Route::post('salvar-categoria', ['as'=>'salvar', 'uses'=>'Categoria@salvar'])->middleware(['validar']);
+        //Deleta Categorias
+        Route::post('deletar-categoria', ['as'=>'deletar', 'uses'=>'Categoria@deletar'])->middleware(['validar']);
+        //Marca Status de Categoria
+        Route::post('marcar-categoria', ['as'=>'marcar','uses'=>'Categoria@marcar'])->middleware(['validar']);
+    });
+    
 
 //ORÇAMENTOS
-    
-    //Cadastro de orçamentos
-    Route::get('/orcamentos','Orcamento@index')->middleware(['validar']);
+    Route::group(['as'=>'orcamento.', 'prefix'=>'finance/orcamentos'], function(){
+        //acessa o sistema
+        Route::get('index', ['as'=>'index','uses'=>'Orcamento@index'])->middleware(['validar']);
+        //Salva Orçamento
+        Route::post('salvar-orcamento', ['as'=>'salvar','uses'=>'Orcamento@salvar'])->middleware(['validar']);
 
-    //Salva Orçamento
-    Route::post('/salvar-orcamento', 'Orcamento@salvar')->middleware(['validar']);
+        //Deleta Orçamento
+        Route::post('deletar-orcamento', ['as'=>'deletar','uses'=>'Orcamento@deletar'])->middleware(['validar']);
 
-    //Deleta Orçamento
-    Route::post('/deletar-orcamento', 'Orcamento@deletar')->middleware(['validar']);
+        //Marca Status do Orçamento
+        Route::post('marcar-orcamento', ['as'=>'marcar','uses'=>'Orcamento@marcar'])->middleware(['validar']);
 
-    //Marca Status do Orçamento
-    Route::post('/marcar-orcamento', 'Orcamento@marcar')->middleware(['validar']);
-
-    //Pesquisa detalhes do orçamento
-    Route::post('/orcamento-detalhes', 'Orcamento@detalhes')->middleware(['validar']);
-
-    //Gera as contas
-    Route::post('/gerar-contas', 'Conta@gerarContas')->middleware(['validar']);
+        //Pesquisa detalhes do orçamento
+        Route::post('orcamento-detalhes', ['as'=>'detalhes','uses'=>'Orcamento@detalhes'])->middleware(['validar']);    
+    });
 
 //CONTAS
+    Route::group(['as'=>'conta.', 'prefix'=>'finance/contas'], function(){
+        //gera as contas automacamente
+        Route::post('gerar-contas', ['as'=>'gerar','uses'=>'Conta@gerarContas'])->middleware(['validar']);
+        //Cadastro de contas
+        Route::get('index', ['as'=>'index','uses'=>'Conta@index'])->middleware(['validar']);
+        //Salva conta
+        Route::post('salvar',['as'=>'salvar','uses'=>'Conta@salvar'])->middleware(['validar']);
+
+        //Deleta uma conta
+        Route::post('deletar-conta',['as'=>'deletar','uses'=>'Conta@deletar'])->middleware(['validar']);
+    });
+
     
-    //Cadastro de Contas
-    Route::get('/contas','Conta@index')->middleware(['validar'])->middleware(['validar']);
-
-    //Salva conta
-    Route::post('/salvar-conta','Conta@salvar')->middleware(['validar']);
-
-    //Deleta uma conta
-    Route::post('/deletar-conta','Conta@deletar')->middleware(['validar']);
-
 //LANÇAMENTOS
+    Route::group(['as'=>'lancamento.', 'prefix'=>'finance/lancamentos'], function(){
+        //View Lançamentos
+        Route::get('index',['as'=>'index','uses'=>'Lancamento@index'])->middleware(['validar']);
 
-    //View Lançamentos
-    Route::get('/lancamentos','Lancamento@index')->middleware(['validar']);
+        //View Lancamentos com filtro
+        Route::post('index',['as'=>'index','uses'=>'Lancamento@index'])->middleware(['validar']);
 
-    //View Lancamentos com filtro
-    Route::post('/lancamentos','Lancamento@index')->middleware(['validar']);
+        //Salva um lançamento
+        Route::post('salvar-lancamento',['as'=>'salvar','uses'=>'Lancamento@salvar'])->middleware(['validar']);
 
-    //Salva um lançamento
-    Route::post('/salvar-lancamento', 'Lancamento@salvar')->middleware(['validar']);
+        //Deleta um orçamento
+        Route::post('deletar-lancamento', ['as'=>'deletar','uses'=>'Lancamento@deletar'])->middleware(['validar']);
 
-    //Deleta um orçamento
-    Route::post('/deletar-lancamento', 'Lancamento@deletar')->middleware(['validar']);
+        //Panição dos lançamentos
+        Route::post('paginar',['as'=>'paginar', 'uses'=>'Saldo@paginarLancamentos'])->middleware(['validar']);
+    });
+    
 
 //SALDO
-    //View Saldo
-    Route::get('/saldo', 'Saldo@index')->middleware(['validar']);
+    Route::group(['as'=>'saldo.', 'prefix'=>'finance/saldo'], function(){
+        //View Saldo
+        Route::get('index', ['as'=>'index','uses'=>'Saldo@index'])->middleware(['validar']);
 
-    //Pesquisa Periodo saldo em dias
-    Route::post('/saldo', 'Saldo@index')->middleware(['validar']);
+        //Pesquisa Periodo saldo em dias
+        Route::post('index', ['as'=>'index', 'uses'=>'Saldo@index'])->middleware(['validar']);
 
-    //Panição dos lançamentos
-    Route::post('/paginar-lancamentos','Saldo@paginarLancamentos')->middleware(['validar']);
+    });
+    
 
 //APLICAÇÕES
-    //View aplicações
-    Route::get('/aplicacao', 'Aplicacao@index')->middleware(['validar']);
+    Route::group(['as'=>'aplicacao.', 'prefix'=>'finance/aplicacao'], function(){
+        //View aplicações
+        Route::get('index', ['as'=>'index', 'uses'=>'Aplicacao@index'])->middleware(['validar']);
 
-    //calcula aplicação
-    Route::post('/calcular-aplicacao','Aplicacao@calcular')->middleware(['validar']);
+        //calcula aplicação
+        Route::post('calculo',['as'=>'calculo', 'uses'=>'Aplicacao@calcular'])->middleware(['validar']);
+    });
+
+//RELATÓRIOS
+    Route::group(['as'=>'relatorio.', 'prefix'=>'finance/relatorios'], function(){
+        //view index
+        Route::get('index', ['as'=>'index','uses'=>'Relatorio@index'])->middleware(['validar']);
+
+        //rota para os filtros de relatório
+        Route::post('index', ['as'=>'index', 'uses'=>'Relatorio@index'])->middleware(['validar']);
+
+        //gera pdf
+        Route::get('index-pdf', ['as'=>'index-pdf','uses'=>'Relatorio@indexPdf'])->middleware(['validar']);
+
+        //add urls
+        Route::post('add-urls', ['as'=>'add-urls','uses'=>'Relatorio@addUrls'])->middleware(['validar']);
+
+    });

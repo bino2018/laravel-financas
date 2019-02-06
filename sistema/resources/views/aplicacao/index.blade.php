@@ -12,7 +12,7 @@
             <div class="col-sm-10">
                 <h5 class="text text-secondary">Dados da Aplicação</h5>
                 <div class="card card-cadastro">
-                    <form id="fr-calculo" action="/calcular-aplicacao" method="post">
+                    <form id="fr-calculo" action="{!! route('aplicacao.calculo') !!}" method="post">
                         <input type="hidden" id="tkn" name="_token" value="{!!csrf_token()!!}">
                         <input type="hidden" id="codigo" name="codigo" value="0">
 
@@ -143,6 +143,6 @@
     </div>
 </div>
 
-<script src="{{asset('js/aplicacao.js')}}"></script>
+<script src="{{asset('finance/js/aplicacao.js')}}"></script>
 
 @stop

@@ -19,7 +19,7 @@ class Lancamento{
     * @return: stdClass $lancamentos stdClass é o resultado da pesquisa por lançamentos no banco
     */
 
-    public function listarLancamentos($params){
+    public function listarLancamentos($params, $filtro=false){
         
         //busca os lançamentos
         $lancamentos = DB::table('lancamento')->select();
@@ -49,10 +49,14 @@ class Lancamento{
         $lancamentos = $lancamentos->orderBy('dtLancamento','desc');
         
         //faz a paginação
-        if( isset($params['data']['page']) && !empty($params['data']['page'])){
-            $lancamentos = $lancamentos->paginate(5,['*'],'page',$params['data']['page']);
+        if(!$filtro){
+            if( isset($params['data']['page']) && !empty($params['data']['page'])){
+                $lancamentos = $lancamentos->paginate(5,['*'],'page',$params['data']['page']);
+            }else{
+                $lancamentos = $lancamentos->paginate(5);
+            }
         }else{
-            $lancamentos = $lancamentos->paginate(5);
+            $lancamentos = $lancamentos->get();
         }
         
         //retorna lançamentos

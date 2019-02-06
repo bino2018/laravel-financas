@@ -12,7 +12,7 @@
             <div class="col-sm-7">
                 <h5 class="text text-secondary">Cadastro</h5>
                 <div class="card card-cadastro">
-                    <form action="/salvar-categoria" method="post">
+                    <form action="{!! route('cat.salvar') !!}" method="post">
                         <input type="hidden" id="tkn" name="_token" value="{!!csrf_token()!!}">
                         <input type="hidden" id="codigo" name="codigo" value="0">
 
@@ -37,7 +37,7 @@
                         <!--<h5 class="text text-secondary">Total Categorias: count($data['categorias'])</h5>-->
                     </div>
                     <div class="col-sm-4">
-                        <a href="/orcamentos" class="btn btn-default btn-sm bg-dark text-light">Orçamentos</a>
+                        <a href="{!! route('orcamento.index') !!}" class="btn btn-default btn-sm bg-dark text-light">Orçamentos</a>
                     </div>
                 </div>    
             </div>
@@ -124,7 +124,10 @@
     </div>
 </div>
 
-<script src="{{asset('js/Chart.js')}}"></script>
-<script src="{{asset('js/categoria.js')}}"></script>
+<input type="hidden" id="route-marcar" value="{!! route('cat.marcar') !!}">
+<input type="hidden" id="route-excluir" value="{!! route('cat.deletar') !!}">
+
+<script src="{{asset('finance/js/Chart.js')}}"></script>
+<script src="{{asset('finance/js/categoria.js')}}"></script>
 
 @stop

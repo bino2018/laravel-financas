@@ -122,18 +122,41 @@ class Saldo{
         $aReceber=0;
         $aPagar = 0;
         $previsao = 0;
-        
+        $contasCalculadas = [];
         //faz o calculo com base nos dados recebidos
         foreach($dadosContas as $num => $val){
-            //agrega ao calculo apenas contas não liquidadas
-            if(is_null($val->vlLancamento)){
-                if($val->tpConta == '1'){
-                    $aReceber += (float) $val->vlConta;
-                }else{
-                    $aPagar += (float) $val->vlConta;
-                }
-            }
             
+            if( !in_array($val->cdConta, $contasCalculadas) ){
+                //agrega ao calculo apenas contas não liquidadas
+                if(is_null($val->vlLancamento)){
+                    if($val->tpConta == '1'){
+                        $aReceber += (float) $val->vlConta;
+                    }else{
+                        $aPagar += (float) $val->vlConta;
+                    }
+
+                //agrega o calculo em contas que já possuem lançamentos 
+                }else{
+                    
+                    $somaLancamentos = DB::table('lancamento')
+                            ->select('vlLancamento')
+                            ->where('cdConta','=',$val->cdConta)
+                            ->sum('vlLancamento');
+                    
+                    if( (float) $val->vlConta > (float) $somaLancamentos ){
+                        $valorRestante = (float) $val->vlConta - (float) $somaLancamentos;
+                        
+                        if($val->tpConta == '1'){
+                            $aReceber += (float) $valorRestante;
+                        }else{
+                            $aPagar += (float) $valorRestante;
+                        }
+                    }
+                }
+
+                $contasCalculadas[] = $val->cdConta;
+            }
+
         }
 
         $previsao = $aReceber - $aPagar;

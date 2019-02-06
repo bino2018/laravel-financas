@@ -10,7 +10,7 @@
         
         <div class="row">
             <div class="col-sm-8">
-                <form action="/saldo" method="post">
+                <form action="{!! route('saldo.index') !!}" method="post">
                     <input type="hidden" id="tkn" name="_token" value="{!!csrf_token()!!}">
                     <div class="row">
                         <div class="col-sm-5">
@@ -89,8 +89,10 @@
 
 @include('modal.contas')
 
-<script src="{{asset('js/inview.js')}}"></script>
-<script src="{{asset('js/Chart.js')}}"></script>
-<script src="{{asset('js/saldo.js')}}"></script>
+<input type="hidden" id="route-paginacao" value="{!! route('lancamento.paginar') !!}">
+
+<script src="{{asset('finance/js/inview.js')}}"></script>
+<script src="{{asset('finance/js/Chart.js')}}"></script>
+<script src="{{asset('finance/js/saldo.js')}}"></script>
 
 @stop

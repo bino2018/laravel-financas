@@ -12,7 +12,7 @@
             <div class="col-sm-8">
                 <h5 class="text text-secondary">Cadastro</h5>
                 <div class="card card-cadastro">
-                    <form action="/salvar-orcamento" method="post">
+                    <form action="{!! route('orcamento.salvar') !!}" method="post">
                         <div class="row">
                             <div class="col-sm-10">
                                 <h5 class="text text-secondary">Dados</h5>
@@ -165,7 +165,7 @@
                     </div>
 
                     <br>
-                    <form action="/gerar-contas" method="post">
+                    <form action="{!! route('conta.gerar') !!}" method="post">
                         <input type="hidden" name="_token" value="{!!csrf_token()!!}">
                         <button class="btn btn-default btn-sm bg-dark text-light form-control form-control-sm">Clique para Gerar/Atualizar Contas</button>
                     </form>
@@ -311,6 +311,9 @@
     </div>
 </div>
 
-<script src="{{asset('js/orcamento.js')}}"></script>
+<input type="hidden" id="route-marcar" value="{!! route('orcamento.marcar') !!}">
+<input type="hidden" id="route-excluir" value="{!! route('orcamento.deletar') !!}">
+
+<script src="{{asset('finance/js/orcamento.js')}}"></script>
 
 @stop

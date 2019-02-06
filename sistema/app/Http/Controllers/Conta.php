@@ -82,7 +82,7 @@ class Conta{
             }
 
             //redireciona apos ação
-            return redirect('/contas');
+            return redirect( route('conta.index') );
 
         //altera conta já existente
         }else{
@@ -102,7 +102,7 @@ class Conta{
             }
 
             //redireciona apos ação
-            return redirect('/contas');
+            return redirect( route('conta.index') );
         }
     }
 
@@ -161,7 +161,7 @@ class Conta{
             $this->conta->gerarContas();
         }
 
-        return redirect('/contas');
+        return redirect( route('conta.index') );
     }
 
 }

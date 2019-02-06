@@ -106,6 +106,8 @@ function respostaPaginacaoLancamentos(resp){
 
 function paginarLancamentos(){
     try{
+        let rota = $('#route-paginacao').val()
+
         //monta os dados
         var page = parseInt($('#pageAtual').val()) + 1
 
@@ -117,7 +119,7 @@ function paginarLancamentos(){
 
         //faz a paginação
         if( parseInt(dados.page) <= parseInt( $('#totalPage').val() ) ){
-            send_ajax('/paginar-lancamentos','post',dados,respostaPaginacaoLancamentos)
+            send_ajax(rota,'post',dados,respostaPaginacaoLancamentos)
         }else{
             $('#loader').hide()
         }

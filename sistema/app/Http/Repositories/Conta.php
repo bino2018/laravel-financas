@@ -142,6 +142,7 @@ class Conta{
                     
                     //verifica tipo de conta e aplica status
                     $statusConta = ($detalhesConta['tpConta'] == '1') ? $recebidoEm : $pagoEm;
+                    $classeLinha = "table-success";
                     
                 }else{
                     //define contador
@@ -153,6 +154,7 @@ class Conta{
 
                     //verifica tipo de conta e aplica status
                     $statusConta = ($detalhesConta['tpConta'] == '1') ? 'A Receber' : 'A Pagar';
+                    $classeLinha = "table-warning";
                 }
 
                 //define informações para montar tabela no frontend
@@ -160,6 +162,7 @@ class Conta{
                 $detalhesConta['valorLancado'] = number_format($somaContaLancamento,2,'.','');
                 $detalhesConta['vencimento'] = date('d-m-Y', strtotime($detalhesConta['dtVencimento']));
                 $detalhesConta['situacao'] = $statusConta;
+                $detalhesConta['classe'] = $classeLinha;
 
                 //define contador total
                 if( isset($arrMeses[$mes]['total'])){

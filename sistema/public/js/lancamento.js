@@ -73,6 +73,8 @@ $(function(){
 
    $('.bt-excluir').click(function(){
     if(confirm("DESEJA EXCLUIR O LANÇAMENTO SELECIONADO??")){
+        let rota = $('#route-excluir').val()
+
         //prepara parametros para requisição
         obj = {
             _token:$('#tkn').val(),
@@ -80,7 +82,7 @@ $(function(){
         }
 
         //envia para requisição ajax com callback
-        send_ajax('/deletar-lancamento','post', obj, respostaDeletaOrcamento)
+        send_ajax(rota,'post', obj, respostaDeletaOrcamento)
     }
 
 })
@@ -184,7 +186,7 @@ function respostaDeletaOrcamento(resp){
 
         if(jsonResp.status == "1"){
             message('Registro excluído com sucesso!!',1)
-            redireciona('/lancamentos')
+            redireciona('')
         }else{
             message('Não foi possível excluir o registro',2)
         }

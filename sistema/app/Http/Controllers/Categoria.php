@@ -62,7 +62,7 @@ class Categoria{
             }
             
             //redireciona apos acao
-            return redirect('/categorias');
+            return redirect( route('cat.index') );
             
         
         //altera categoria existente
@@ -87,7 +87,7 @@ class Categoria{
             }
 
             //redireciona apos acao
-            return redirect('/categorias');
+            return redirect( route('cat.index') );
         }
 
     }

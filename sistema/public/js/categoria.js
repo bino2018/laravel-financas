@@ -21,6 +21,8 @@ $(function(){
     */
 
     $('.checks').click(function(){
+        let rota = $('#route-marcar').val()
+
         //prepara parametros para requisição
         var obj = {
             _token: $('#tkn').val(),
@@ -30,7 +32,7 @@ $(function(){
         }
         
         //envia para requisição com callback
-        send_ajax('/marcar-categoria', 'post', obj, respostaMarcaCategoria)
+        send_ajax(rota, 'post', obj, respostaMarcaCategoria)
 
     })
 
@@ -65,6 +67,8 @@ $(function(){
     $('.bt-excluir').click(function(){
         
         if(confirm("DESEJA EXCLUIR A CATEGORIA SELECIONADA??")){
+            let rota = $('#route-excluir').val()
+
             //prepara parametros para requisição
             obj = {
                 _token:$('#tkn').val(),
@@ -72,7 +76,7 @@ $(function(){
             }
 
             //envia para requisição ajax com callback
-            send_ajax('/deletar-categoria','post', obj, respostaDeletaCategoria)
+            send_ajax(rota,'post', obj, respostaDeletaCategoria)
         }
     })
 
@@ -109,7 +113,7 @@ function respostaDeletaCategoria(resp){
         if(jsonResp.status == "1"){
             
             message('Registro Excluído com sucesso!!',1)
-            redireciona('/categorias')
+            redireciona('')
         
         }else{
             message('Não foi possíve excluir o registro',2)

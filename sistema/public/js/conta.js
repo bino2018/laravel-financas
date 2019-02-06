@@ -53,11 +53,13 @@ $(function(){
 
     $('.bt-excluir').click(function(){
         if(confirm("DESEJA REMOVER A CONTA SELECIONADA?")){
+            let rota = $('#route-excluir').val()
+
             var obj = {
                 _token: $('#tkn').val(), cd: $(this).attr('data-cd')
             }
 
-            send_ajax('/deletar-conta','post', obj, respostaDeletaConta)
+            send_ajax(rota,'post', obj, respostaDeletaConta)
         }
     })
 
@@ -90,7 +92,7 @@ function respostaDeletaConta(resp){
 
         if(jsonResp.status == "1"){
             message('Registro excluído com sucesso!!',1)
-            redireciona('/contas')
+            redireciona('')
         }else{
             message('Não foi possível excluir o registro',2)
         }

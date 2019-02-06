@@ -112,6 +112,9 @@ class Lancamento{
             //verifica se saldo disponível é >= ao valor enviado
             $saldoOk = ( (float) $valorSaldo >= (float) $params['valor'] ) ? true : false;
             
+            //formata o saldo para exibição
+            $valorSaldo = number_format($valorSaldo,2,'.','');
+
             if( !$saldoOk ){
                 session(['message'=>'Saldo insuficiente, o saldo atual é de: R$ '.$valorSaldo]);
                 session(['tipoMessage'=>'2']);
@@ -153,7 +156,7 @@ class Lancamento{
         }
 
         //retorna apos acao
-        return redirect('/lancamentos');
+        return redirect( route('lancamento.index') );
     }
 
     /**

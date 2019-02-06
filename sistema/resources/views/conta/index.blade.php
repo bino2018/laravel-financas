@@ -12,7 +12,7 @@
             <div class="col-sm-8">
                 <h5 class="text text-secondary">Cadastro Manual</h5>
                 <div class="card card-cadastro">
-                    <form action="/salvar-conta" method="post">
+                    <form action="{!! route('conta.salvar') !!}" method="post">
                         <input type="hidden" id="tkn" name="_token" value="{!!csrf_token()!!}">
                         <input type="hidden" id="codigo" name="codigo" value="0">
 
@@ -79,13 +79,13 @@
                     <div class="col-sm-8">
                         <div class="row">
                             <div class="col-sm-5">
-                                <form action="/gerar-contas" method="post">
+                                <form action="{!! route('conta.gerar') !!}" method="post">
                                     <input type="hidden" name="_token" value="{!!csrf_token()!!}">
                                     <button class="btn btn-default btn-sm bg-dark text-light">Gerar Contas</button>  
                                 </form>
                             </div>
                             <div class="col-sm-5">
-                                <a href="/lancamentos" class="btn btn-default btn-sm bg-dark text-light">Lançamentos</a>
+                                <a href="{!! route('lancamento.index') !!}" class="btn btn-default btn-sm bg-dark text-light">Lançamentos</a>
                             </div>
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                                 <td>Saldo Geral: </td>
                                 <td>R$ {{$resumo['saldo']['detalhes']['saldo']}}</td>
                             </tr>
-                            {{--<tr>
+                            <tr>
                                 <td>Total A Receber: </td>
                                 <td>R$ {{$resumo['pendentes']['pendentes']['a_receber']}}</td>
                             </tr>
@@ -121,7 +121,7 @@
                             <tr>
                                 <td>Previsão de Saldo: </td>
                                 <td>R$ {{$valorPrevisao}}</td>
-                            </tr>--}}
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                                     <tbody>
                                         @foreach( $contasReceber[$mes] as $conta => $valores )
                                             @if( is_numeric($conta) )
-                                                <tr>
+                                                <tr class="{{$valores['classe']}}">
                                                     <td>{{$valores['dsConta']}}</td>
                                                     <td>{{$valores['valor']}}</td>
                                                     <td>{{$valores['valorLancado']}}</td>
@@ -256,7 +256,7 @@
                                     <tbody>
                                         @foreach( $contasPagar[$mes] as $conta => $valores )
                                             @if( is_numeric($conta) )
-                                                <tr>
+                                                <tr class="{{$valores['classe']}}">
                                                     <td>{{$valores['dsConta']}}</td>
                                                     <td>{{$valores['valor']}}</td>
                                                     <td>{{$valores['valorLancado']}}</td>
@@ -281,6 +281,8 @@
     </div>
 </div>
 
-<script src="{{asset('js/conta.js')}}"></script>
+<input type="hidden" id="route-excluir" value="{!! route('conta.deletar') !!}">
+
+<script src="{{asset('finance/js/conta.js')}}"></script>
 
 @stop
