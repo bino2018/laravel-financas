@@ -43,8 +43,11 @@ values('nomeusuario','senha','email@gmail.com','1','1');
  <p>
   Utilizando um terminal Edite o arquivo rodando o comando: <br>
   sudo nano /etc/apache2/sites-enabled/000-default.conf
+  <br>
   
-  <br><br>
+  Insira o conteúdo abaixo antes do fechamento da tag </VirtualHost>
+  
+  <br>
         
         Alias /finance /var/www/laravel-financas/sistema/public
         <Directory /var/www/laravel-financas/sistema/public>
