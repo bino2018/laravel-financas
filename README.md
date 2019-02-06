@@ -46,11 +46,11 @@ values('nomeusuario','senha','email@gmail.com','1','1');
   
   <br><br>
         
-        <br>Alias /finance /var/www/laravel-financas/sistema/public
-        <br><Directory /var/www/laravel-financas/sistema/public>
-                <br>Options Indexes FollowSymLinks
-                <br>AllowOverride All
-        <br></Directory>
+        Alias /finance /var/www/laravel-financas/sistema/public
+        <Directory /var/www/laravel-financas/sistema/public>
+                Options Indexes FollowSymLinks
+                AllowOverride All
+        </Directory>
 
 </p>
 
